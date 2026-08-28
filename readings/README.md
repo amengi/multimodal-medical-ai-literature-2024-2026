@@ -1,5 +1,17 @@
 # Paper Readings
 
+单篇 reading 保持简短；更深入的“如何结合、如何创新、怎样做关键反证”见 [跨论文创新路线图](../innovation-roadmap.md)。
+
+## 面向后续研究的组合索引
+
+| 研究路线 | 核心论文组合 | 每篇论文承担的角色 |
+|---|---|---|
+| A. MNAR × 三重长尾 × 信息覆盖路由 | UniMIX-AD + PASSION + SimMLM + OMIB + MCR + PID | 组合图、缺失不平衡、动态专家、弱模态保护、竞争诊断、信息分解 |
+| B. 可拒绝的非幻觉补全 | MUST + MADAT + M³FeCon + DeepIMV + InfoBridge + SimMLM | shared/private、生成、重建、变分不确定性、条件依赖、不生成基线 |
+| C. 少量锚点可识别非配对学习 | MUSK + IPIC + UNIALIGN + Identifiable SCA + I²M² | 单模态规模化预训练、组标签、无配对对齐、可识别条件、依赖分解 |
+| D. PID 引导自适应融合 | PID + InfoBridge + HEALNet + SimMLM + Theory | 信息诊断、保护独有信息、异质融合、专家库、泛化条件 |
+| E. 长尾医学 VLM | RadDiag + CXR-LT + MUSK + TITAN + Neglected Tails + NIB | 医学长尾、基准、基础模型、病理 VLM、尾部机制、模态依赖审计 |
+
 ## 医学论文
 
 1. [UniMIX-AD](01-unimix-ad.md) — 任意缺失与模态组合长尾
