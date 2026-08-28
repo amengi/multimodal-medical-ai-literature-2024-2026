@@ -14,6 +14,7 @@
 
 - [综合比较矩阵](comparison-matrix.md)
 - [研究版图、关键空白与选题建议](research-gaps.md)
+- [从文献到课题：深度创新路线图](innovation-roadmap.md)
 - [信息论 × 多模态阅读地图](information-theory.md)
 - [已核验的论文原文与代码链接](paper-links.md)
 - [检索与证据说明](methodology.md)
@@ -52,6 +53,6 @@
 
 ## 使用说明
 
-目前共收录 **32 篇** reading。每篇都区分：论文明确报告的事实、阅读后的批判性判断、以及可迁移的研究启发。未在论文主页或正文中核验的代码会标记为“未核验”。原文链接以出版社、正式 proceedings、PMLR、OpenReview、PubMed 或 arXiv 落地页为主，并在 [paper-links.md](paper-links.md) 集中维护。
+目前共收录 **32 篇** reading。单篇笔记刻意保持简短，只保留论文事实、关键边界和一条可迁移启发；跨论文的组合方式、创新假设、模型原型、关键实验与失败判据集中在 [innovation-roadmap.md](innovation-roadmap.md)。未在论文主页或正文中核验的代码会标记为“未核验”。原文链接以出版社、正式 proceedings、PMLR、OpenReview、PubMed 或 arXiv 落地页为主，并在 [paper-links.md](paper-links.md) 集中维护。
 
 本仓库仅保存阅读笔记和公开链接，不重新分发受版权保护的论文全文。论文内容和图表版权归原作者及出版方所有。
