@@ -8,7 +8,7 @@
 - 非配对或弱配对学习（unpaired/weakly paired learning）
 - 信息瓶颈、条件互信息与信息分解（information theory）
 
-检索窗口为 **2024-08-28 至 2026-08-28**。正式发表于 MICCAI 2024、ACM MM 2024 等会议的论文按 proceedings/会议时间纳入。另收录少量略早但具有直接方法启发的论文，并单独标明。
+当前滚动检索窗口为 **2024-09-14 至 2026-09-14**。正式发表于 MICCAI、CVPR、ICML、NeurIPS 等会议的论文按 proceedings/会议时间纳入。另收录少量略早但具有直接方法启发的论文，并单独标明。
 
 ## 快速入口
 
@@ -22,11 +22,11 @@
 
 ## 优先阅读路线
 
-1. **真实缺失与不平衡**：PASSION → SimMLM → UniMIX-AD
+1. **真实缺失与不平衡**：PASSION → SimMLM → UniMIX-AD → BALM → NSCLC missing-aware survival
 2. **共享/私有表示与生成补全**：DRIM → MUST → MADAT
 3. **类别长尾**：RadDiag → CXR-LT → CLIMD
 4. **非配对学习**：UNest → MUSK → UNIALIGN → Identifiable SCA
-5. **信息论与融合机制**：PID framework → OMIB → InfoBridge → MCR → DeepIMV
+5. **信息论与融合机制**：PID framework → OMIB → InfoBridge → MCR → LSMI → CMCM
 
 ## 核心论文
 
@@ -50,9 +50,17 @@
 | 冗余/独有/协同分解 | [PID framework](readings/29-pid-framework.md) |
 | 缺失多组学信息瓶颈 | [DeepIMV](readings/31-deepimv.md) |
 | 异质医学融合 | [HEALNet](readings/32-healnet.md) |
+| 重建样本与完整样本梯度冲突 | [ANGA](readings/33-anga.md) |
+| 不均衡缺失率下的优化平衡 | [BALM](readings/34-balm.md) |
+| 自然缺失下的 NSCLC 生存预测 | [Missing-aware NSCLC survival](readings/35-nsclc-missing-survival.md) |
+| 眼科多模态与稀有病长尾 | [EyeCLIP](readings/36-eyeclip.md) |
+| 信息瓶颈与 modality gap | [Multimodal IB alignment](readings/37-multimodal-ib-alignment.md) |
+| Copula 联合依赖与缺失表示 | [CMCM](readings/38-cmcm.md) |
+| 样本级 redundancy/unique/synergy | [LSMI](readings/39-lsmi.md) |
+| 协同信息与无限掩码 | [InfMasking](readings/40-infmasking.md) |
 
 ## 使用说明
 
-目前共收录 **32 篇** reading。单篇笔记刻意保持简短，只保留论文事实、关键边界和一条可迁移启发；跨论文的组合方式、创新假设、模型原型、关键实验与失败判据集中在 [innovation-roadmap.md](innovation-roadmap.md)。未在论文主页或正文中核验的代码会标记为“未核验”。原文链接以出版社、正式 proceedings、PMLR、OpenReview、PubMed 或 arXiv 落地页为主，并在 [paper-links.md](paper-links.md) 集中维护。
+目前共收录 **40 篇** reading。单篇笔记刻意保持简短，只保留论文事实、关键边界和一条可迁移启发；跨论文的组合方式、创新假设、模型原型、关键实验与失败判据集中在 [innovation-roadmap.md](innovation-roadmap.md)。未在论文主页或正文中核验的代码会标记为“未核验”。原文链接以出版社、正式 proceedings、PMLR、OpenReview、PubMed 或 arXiv 落地页为主，并在 [paper-links.md](paper-links.md) 集中维护。
 
 本仓库仅保存阅读笔记和公开链接，不重新分发受版权保护的论文全文。论文内容和图表版权归原作者及出版方所有。

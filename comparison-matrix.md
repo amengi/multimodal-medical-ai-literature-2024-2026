@@ -23,6 +23,8 @@
 | IPIC | 生物多模态 | 完全不配对、组标签 | 不针对单例缺失 | 组分布可不均衡 | 否 | 表征学习 | 依赖处理组标签 |
 | PG-MLIF | WSI + genomics | 完整配对 | 无 | 无 | 否 | 生存 | 可作完整模态融合基线 |
 | HEALNet | WSI + multi-omics | 患者级不完整 | 共享潜空间与缺失模态训练 | 未专门建模 | 否 | 生存 | TCGA；需外部验证与校准 |
+| Missing-aware NSCLC survival | CT + WSI + 临床变量 | 患者级自然不完整 | missing-aware 中间融合 | 模态组合可不均衡 | 否 | 生存 | 小型私有 NSCLC 队列；需外部中心、时间泄漏和 MNAR 审计 |
+| EyeCLIP | 11 类眼科影像 + 少量报告 | 部分患者级配对 | 重建 + 图像/图像与图文对比 | 疾病、模态、图文共现 | 否 | 分类/检索/VQA | 中国预训练人群占主；共享表示可能压缩稀有模态独有信息 |
 
 ## 信息论及理论论文
 
@@ -36,6 +38,12 @@
 | PID framework | redundancy / unique / synergy | 量化模态交互 | 含病理案例 | 选择融合、补全和路由策略 | PID 定义与高维估计不唯一 |
 | Theory of Multimodal Learning | 泛化界 | 多模态为何提高样本效率 | 否 | 检验连接与异质性条件 | 不覆盖任意噪声、缺失和偏移 |
 | DeepIMV | 变分 IB、PoE | 缺失多组学 | 是 | 缺失模态与信息压缩直接基线 | PoE 冲突时可能过度自信 |
+| ANGA | 熵课程、梯度方向对齐 | 重建样本压制完整样本 | 否 | 缺失补全后的优化安全 | 非医学构造缺失；熵不是病理真实性 |
+| BALM | 表示校准、梯度幅值/方向重平衡 | 不均衡模态缺失率 | 否 | 三重长尾下的优化基线 | 音视文本情感数据；未覆盖 MNAR/站点偏移 |
+| Multimodal IB alignment | 表示级 IB 变分代理 | modality gap 与 nuisance 保留 | 否 | 对齐强度和 private 信息保护 | 代理界与 CKA 不证明任务信息正确分解 |
+| CMCM | Gaussian-mixture 边缘 + Copula 联合依赖 | 复杂交互与缺失表示生成 | 是（MIMIC） | 条件分布补全和依赖建模 | Copula/边缘族假设；患者级可识别性未自动成立 |
+| LSMI | pointwise information、样本级 entropy estimator | 样本级 redundancy/unique/synergy | 否 | 为 PID 路由提供候选控制量 | 密度估计偏差；不是个体因果解释 |
+| InfMasking | 无限掩码 MI 代理 | 协同模式学习不足 | 否 | 缺失组合训练与 synergy 压力测试 | 代理提升不等于正式 PID synergy 增大 |
 
 ## 最适合作为实验基线的组合
 
@@ -45,3 +53,6 @@
 - 病理–组学生存：PG-MLIF、DRIM、M²Surv、MUST。
 - 非配对：UNest、MulModSeg、MUSK、IPIC。
 - 类别长尾：RadDiag、CXR-LT、CLIMD。
+- 自然缺失临床基线：Missing-aware NSCLC survival、CMCM。
+- 不均衡缺失与梯度平衡：PASSION、BALM、ANGA。
+- 样本级信息诊断：LSMI；协同训练压力测试：InfMasking。

@@ -28,6 +28,8 @@
 - [SimMLM](readings/07-simmlm.md)：按模态组合动态选择专家；
 - [OMIB](readings/24-omib.md)、[MCR](readings/26-mcr.md)：弱模态的信息压制和模态竞争；
 - [PID framework](readings/29-pid-framework.md)：区分冗余、独有与协同，而不是把所有增益归因于“互补性”。
+- [BALM](readings/34-balm.md)、[ANGA](readings/33-anga.md)：分别处理不均衡缺失率下的特征/梯度平衡，以及重建样本与完整样本的梯度冲突；
+- [LSMI](readings/39-lsmi.md)：提供样本级信息交互诊断候选。
 
 ### 真正的新问题
 
@@ -80,6 +82,8 @@
 - [DeepIMV](readings/31-deepimv.md)：缺失多组学的变分信息瓶颈；
 - [InfoBridge](readings/25-infobridge.md)：用条件依赖避免过度融合；
 - [SimMLM](readings/07-simmlm.md)：不生成缺失模态的动态专家基线。
+- [CMCM](readings/38-cmcm.md)：以 Copula 表达缺失 latent 的条件分布；
+- [Missing-aware NSCLC survival](readings/35-nsclc-missing-survival.md)：真实自然缺失下的不生成临床基线。
 
 ### 真正的新问题
 
@@ -165,6 +169,8 @@
 - [HEALNet](readings/32-healnet.md)：异质、多尺度医学模态融合；
 - [SimMLM](readings/07-simmlm.md)：按模态组合选择专家；
 - [A Theory of Multimodal Learning](readings/30-theory-multimodal.md)：连接性、异质性与泛化条件。
+- [LSMI](readings/39-lsmi.md)：样本级交互估计；
+- [InfMasking](readings/40-infmasking.md)：以随机掩码施加协同学习压力。
 
 ### 真正的新问题
 
@@ -210,6 +216,7 @@
 - [The Neglected Tails in VLMs](readings/23-neglected-tails.md)：视觉—语言模型尾部概念失效；
 - [Narrowing Information Bottleneck](readings/27-nib.md)：审计图文模型到底依赖哪一侧；
 - [Knowledge Bridger](readings/19-knowledge-bridger.md)：用外部知识连接稀疏语义。
+- [EyeCLIP](readings/36-eyeclip.md)：11 类眼科检查、部分报告与稀有病少样本场景。
 
 ### 真正的新问题
 
@@ -234,6 +241,52 @@
 ### 可证伪条件
 
 若移除视觉输入后尾部性能基本不变，模型的“多模态诊断”主要由语言/检索先验驱动；若外部中心同义词变化即导致崩溃，则改进是词表适配而非医学视觉泛化。
+
+## 2026-09-14：三条新增、可证伪的研究连接
+
+### Idea 1：信息增益监督的缺失率—梯度双层路由
+
+**科学问题。** BALM/PASSION 能平衡平均梯度，但不知道某个尾部模态组合究竟缺少样本、缺少任务信息，还是被重建样本的错误梯度压制。ANGA 用完整样本构造梯度锚点，LSMI 则可能给出病例级交互结构；三者尚未在真实医学 MNAR 与疾病长尾中联合检验。
+
+**假设。** 对病例 $i$ 和可见模态集合 $R_i$，真实新增模态带来的边际风险下降
+\(\Delta_i=\ell(f(X_{R_i}),Y_i)-\ell(f(X_{R_i\cup m}),Y_i)\)
+可以由样本级 redundancy/unique/synergy 诊断与梯度冲突共同预测；只对预测为正增益且可靠的模态/重建样本加强路由，会改善最坏组合而不牺牲完整病例。
+
+**最小模型。** 以 UniMIX-AD/SimMLM 为主干，加入 BALM 的 Gradient Rebalancing；训练完整子集上记录新增模态干预得到的
+\(\Delta_i\)，用 LSMI 特征、模态质量、组合频率和缺失倾向训练轻量控制器。重建样本只有在不确定性低且与完整样本梯度夹角小于阈值时，才进入 ANGA 风格锚点更新。
+
+**必要损失。** 主任务损失 + 截断 propensity 加权的最坏组风险 + 梯度一致性；LSMI 首先只作离线监督，不直接把不稳定 MI 数值加进端到端损失。若控制器不能预测
+\(\Delta_i\)，立即移除信息分支。
+
+**基线与消融。** late fusion、masked attention、PASSION、BALM、ANGA、UniMIX-AD；消融频率、质量、LSMI、梯度夹角和 propensity。报告 disease × modality-combination × site 的 macro AUROC/recall、worst-group risk、ECE/Brier 和训练梯度统计。
+
+**外部验证与反证。** 在真实缺失记录的第二中心验证，并分别禁止/允许使用 $R$。若 LSMI 与真实新增模态收益在控制类别、样本量、站点后无稳定关系，或路由改善仅来自更大计算量，则“信息增益监督”主张失败。
+
+### Idea 2：Copula 条件后验 + 自适应 IB 的可拒绝缺失推断
+
+**科学问题。** CMCM 能生成缺失 latent 的分布，Multimodal IB alignment 能压缩 modality-specific nuisance，但统一强压缩会同时删除不可恢复、却与任务有关的 private 信息。自然缺失 NSCLC 框架提供了一个不生成的现实基线。
+
+**假设。** 将观测模态表示分为 task-shared、task-private 和 site nuisance 后，Copula 后验只在可恢复 shared 部分具有良好覆盖；对 private 部分应保留宽后验并触发拒绝或检查建议。IB 强度应随估计的条件独有信息和站点 nuisance 自适应，而不是固定。
+
+**最小模型。** 冻结 CT/WSI/临床编码器；以 Gaussian-mixture marginal + Copula 学习 $p(z_{1:M}\mid S)$，任务头从后验多样本预测生存风险。轻量门控在“后验融合、仅观测模态、拒绝/建议检查”三种动作中选择；IB 只压缩经站点预测器确认的 nuisance 子空间。
+
+**必要损失。** 生存负对数似然或 Cox 损失、Copula 对数似然、校准损失和选择性风险约束；不要同时堆叠对比、正交、重建等无法分别归因的项。CMI/IB 必须声明采用的变分界，报告估计器偏差与 batch 敏感性。
+
+**基线与消融。** 自然缺失 NSCLC 中间融合、DeepIMV、CMCM、均值/最近邻插补、MUST 式生成、oracle complete modality。消融 Copula 家族、边缘分布、固定/自适应 IB、拒绝门控；在完整病例人工遮挡时测后验覆盖、C-index、IBS、ECE/Brier、risk–coverage 和病灶/亚型尾部。
+
+**外部验证与反证。** 外部医院同时改变扫描协议和检查倾向。若 Copula 后验覆盖失准，或选择性预测不能优于不生成的 missing-aware fusion，主张应退回为普通不完整融合，不能宣称“可靠补全”。
+
+### Idea 3：EyeCLIP 的四重长尾与模态证据审计
+
+**科学问题。** EyeCLIP 同时存在疾病频率、检查模态频率、文本提及频率和图文共现频率四种长尾。总体零/少样本增益不能区分稀有病提升来自真实视觉证据、跨检查共享语义还是报告词典先验。
+
+**假设。** 尾部病例的错误主要由“低图文共现 + 高模态独有信息”组合驱动；对这类病例保持 private visual branch 并进行证据来源校准，比进一步扩大统一图文对齐更有效。
+
+**最小模型。** 冻结 EyeCLIP 主干，建立共享图文、模态 private、检索证据三个分支；用 LSMI/模态屏蔽离线估计信息结构，由小型门控选择 shared、private 或检索专家。训练不需要生成眼底图像，只需多标签任务损失、来源一致性和温度/Dirichlet 校准。
+
+**关键实验。** 四种频率分别分桶；对报告同义词、模板和检索库做反事实替换；移除视觉、文本或某检查模态；比较统一 encoder、模态专属 encoder、late fusion、EyeCLIP 原模型和 Neglected-Tails 风格重加权。至少报告 rare-class AUPRC/recall、macro F1、最坏交叉桶、ECE、risk–coverage 与跨国家外测。
+
+**可证伪条件。** 若移除视觉后尾部表现不降，所谓多模态稀有病能力主要由语言先验驱动；若 LSMI 分数不能预测新增真实检查的边际收益，则不能用它作为个体路由依据；若 private branch 只改善同中心而不改善外部中心，则它可能保留的是设备 nuisance。
 
 ## 五条路线如何取舍
 

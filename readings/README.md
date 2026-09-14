@@ -6,11 +6,11 @@
 
 | 研究路线 | 核心论文组合 | 每篇论文承担的角色 |
 |---|---|---|
-| A. MNAR × 三重长尾 × 信息覆盖路由 | UniMIX-AD + PASSION + SimMLM + OMIB + MCR + PID | 组合图、缺失不平衡、动态专家、弱模态保护、竞争诊断、信息分解 |
-| B. 可拒绝的非幻觉补全 | MUST + MADAT + M³FeCon + DeepIMV + InfoBridge + SimMLM | shared/private、生成、重建、变分不确定性、条件依赖、不生成基线 |
+| A. MNAR × 三重长尾 × 信息覆盖路由 | UniMIX-AD + PASSION + SimMLM + BALM + MCR + LSMI | 组合图、缺失不平衡、动态专家、梯度平衡、竞争诊断、样本级信息 |
+| B. 可拒绝的非幻觉补全 | MUST + MADAT + M³FeCon + DeepIMV + CMCM + NSCLC missing-aware | shared/private、生成、重建、条件分布、不生成现实基线 |
 | C. 少量锚点可识别非配对学习 | MUSK + IPIC + UNIALIGN + Identifiable SCA + I²M² | 单模态规模化预训练、组标签、无配对对齐、可识别条件、依赖分解 |
-| D. PID 引导自适应融合 | PID + InfoBridge + HEALNet + SimMLM + Theory | 信息诊断、保护独有信息、异质融合、专家库、泛化条件 |
-| E. 长尾医学 VLM | RadDiag + CXR-LT + MUSK + TITAN + Neglected Tails + NIB | 医学长尾、基准、基础模型、病理 VLM、尾部机制、模态依赖审计 |
+| D. PID 引导自适应融合 | PID + LSMI + InfoBridge + HEALNet + InfMasking | 群体/样本诊断、保护独有信息、异质融合、协同训练 |
+| E. 长尾医学 VLM | EyeCLIP + RadDiag + CXR-LT + MUSK + TITAN + Neglected Tails | 眼科与放射长尾、基础模型、尾部机制、模态依赖审计 |
 
 ## 医学论文
 
@@ -33,6 +33,8 @@
 17. [IPIC](17-ipic.md) — 生物数据非配对对比学习
 18. [PG-MLIF](18-pg-mlif.md) — 病理–基因组低秩交互融合
 19. [HEALNet](32-healnet.md) — 异质生物医学数据、缺失模态与生存分析
+20. [Missing-aware NSCLC survival](35-nsclc-missing-survival.md) — CT/WSI/临床变量的自然缺失生存预测
+21. [EyeCLIP](36-eyeclip.md) — 11 类眼科模态、部分文本与稀有病长尾
 
 ## 可迁移的非医学论文
 
@@ -41,6 +43,8 @@
 22. [Identifiable Shared Component Analysis](21-identifiable-sca.md)
 23. [Intervention-Stable Feature Learning](22-intervention-stable-fusion.md)
 24. [The Neglected Tails in Vision-Language Models](23-neglected-tails.md)
+25. [ANGA](33-anga.md) — 重建样本与完整样本的梯度对齐
+26. [BALM](34-balm.md) — 不均衡缺失率下的特征与梯度平衡
 
 ## 信息论与多模态机制
 
@@ -52,3 +56,7 @@
 30. [PID Framework](29-pid-framework.md) — 冗余、独有与协同信息
 31. [A Theory of Multimodal Learning](30-theory-multimodal.md) — 连接、异质性与泛化
 32. [DeepIMV](31-deepimv.md) — 缺失多组学的变分信息瓶颈
+33. [Multimodal IB alignment](37-multimodal-ib-alignment.md) — 压缩模态特异 nuisance 与 modality gap
+34. [CMCM](38-cmcm.md) — Copula 联合依赖和缺失表示分布
+35. [LSMI](39-lsmi.md) — 样本级冗余、独有与协同信息估计
+36. [InfMasking](40-infmasking.md) — 随机掩码与协同信息代理

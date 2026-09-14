@@ -15,6 +15,7 @@
 | 模态缺失 | 缺失模态中只有冗余部分原则上可从现有模态恢复 | \(I(X_m;Y\mid X_{obs})\)、预测熵 | DeepIMV、OMIB、HEALNet |
 | 长尾/模态竞争 | 头部或强模态可能压制弱模态的梯度和任务信息 | 各模态任务 MI、条件 MI 下界 | OMIB、MCR |
 | 非配对学习 | 没有样本级联合分布时，普通 MI 目标未必可识别 | 分布级依赖、少量锚点下的 CMI | Identifiable SCA、PID framework |
+| 个体化融合 | 群体平均信息结构不能直接决定单病例路由 | pointwise redundancy/unique/synergy + 估计不确定性 | LSMI、InfMasking |
 
 ## 三条关键判断
 
@@ -29,6 +30,9 @@
 3. [InfoBridge](readings/25-infobridge.md)：看条件 MI 如何避免过度融合。
 4. [DeepIMV](readings/31-deepimv.md) 与 [HEALNet](readings/32-healnet.md)：映射到缺失组学、病理和生存分析。
 5. [A Theory of Multimodal Learning](readings/30-theory-multimodal.md)：区分一般化理论与信息分解理论。
+6. [Multimodal IB alignment](readings/37-multimodal-ib-alignment.md)：理解对齐与 private-information 保留之间的张力。
+7. [CMCM](readings/38-cmcm.md) 与 [LSMI](readings/39-lsmi.md)：分别从联合分布和样本级交互补足条件建模。
+8. [InfMasking](readings/40-infmasking.md)：把“增强 synergy”的算法主张与可测 PID 证据分开审计。
 
 ## 可执行的研究假设
 
@@ -45,6 +49,18 @@
 ### C. MNAR 条件信息瓶颈
 
 令缺失掩码为 \(R\)。临床检查获取通常是非随机的，因此目标应比较 \(I(Z;Y\mid R)\) 与 \(I(Z;R)\)，同时做获取倾向敏感性分析，避免模型只利用检查流程预测疾病。
+
+### D. 对齐—独有信息的自适应瓶颈
+
+Multimodal IB alignment 希望压缩模态特异 nuisance，InfoBridge 则警惕过度对齐删除条件独有信息。可按模态和亚组估计 $I(X_m;Y\mid X_{-m})$：条件独有信息高时减弱瓶颈并保留 private branch；低且 nuisance 明显时加强压缩。这里优化的仍是变分界/代理，必须用真实模态屏蔽与新增干预验证。
+
+### E. Copula 后验与可拒绝补全
+
+CMCM 给出联合潜变量分布，路线 B 可据此输出 $p(z_m\mid z_{obs},R,S)$ 而不是单点伪模态。关键可测量不是 latent 重建误差，而是后验覆盖率、下游风险校准、尾部病种覆盖和拒绝后的 risk–coverage；若 Copula 族失配或区间不覆盖真实完整病例，应回退到非生成融合。
+
+### F. 样本级交互只作为可验证控制信号
+
+LSMI 将 redundancy/unique/synergy 下沉到样本级，适合给路由器提供候选标签；InfMasking 则可作为协同训练干预。二者组合时，必须先检验 LSMI 分数能否预测“新增一个真实模态”带来的边际收益，并报告估计器跨 batch、表示尺度和站点的稳定性。若不能预测真实干预收益，则不得把分数当作个体临床解释。
 
 ## 实验注意事项
 

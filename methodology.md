@@ -6,7 +6,7 @@
 
 ## 检索策略
 
-- 时间：2024-08-28—2026-08-28。
+- 时间：滚动 24 个月；本轮为 2024-09-14—2026-09-14。
 - 医学来源：Nature、Nature Medicine、Nature Communications、Medical Image Analysis、npj Digital Medicine、MICCAI、MIDL。
 - 通用 AI 来源：CVPR、ICCV、NeurIPS、ACM MM、WACV。
 - 关键词族：`missing modality`、`incomplete multimodal`、`modality dropout`、`modality imputation`、`long-tailed multimodal`、`modality combination imbalance`、`unpaired multimodal`、`shared private representation`、`multimodal medical fusion`。
@@ -25,7 +25,7 @@
 
 这些是定向简读，不等同于逐公式复现。对于未公开数据、未报告统计显著性或只在模拟缺失上验证的工作，笔记会明确指出证据边界。
 
-链接于 2026-08-28 重新核验。优先使用正式落地页而非直接 PDF；集中入口见 [paper-links.md](paper-links.md)。部分出版社或 OpenReview 页面可能有地区、Cookie 或浏览器验证限制，因此保留 PubMed、项目页或代码作为备用入口。
+链接于 2026-09-14 重新核验。优先使用正式落地页而非直接 PDF；集中入口见 [paper-links.md](paper-links.md)。部分出版社或 OpenReview 页面可能有地区、Cookie 或浏览器验证限制，因此保留 PubMed、PMC、项目页或代码作为备用入口。
 
 ## 三种“长尾”
 
@@ -34,3 +34,10 @@
 - **模态组合长尾**：少数模态组合占据大多数患者，某些组合非常稀有。
 
 三者的优化对象不同，不应只用统一的重采样或加权损失处理。
+
+## 2026-09-14 周检索记录
+
+- **检索式族**：精确任务（missing/incomplete modality）、同义扩展（modality dropout/imputation/absence）、方法导向（information bottleneck/conditional MI/copula/PID/synergy）、venue 导向（CVPR 2026、ICML/NeurIPS 2025、MICCAI 2025）、综述/benchmark。
+- **权威来源**：CVF Open Access、PMLR、NeurIPS Proceedings、MICCAI Open Access、Nature/npj Digital Medicine、PubMed/PMC；代码仅在论文页或对应公开仓库可交叉确认时记录。
+- **筛选**：标题/摘要候选 24 篇；去除已收录、非目标问题、只有普通融合而无现实缺失/长尾/非配对机制、以及元数据不足条目后，纳入 8 篇。
+- **年份处理**：NSCLC 工作以 npj Digital Medicine 2026 正式在线版本替代 2026-01 预印本；其余均按正式 proceedings 或期刊年份记录。
