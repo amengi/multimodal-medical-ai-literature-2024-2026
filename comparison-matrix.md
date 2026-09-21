@@ -25,6 +25,8 @@
 | HEALNet | WSI + multi-omics | 患者级不完整 | 共享潜空间与缺失模态训练 | 未专门建模 | 否 | 生存 | TCGA；需外部验证与校准 |
 | Missing-aware NSCLC survival | CT + WSI + 临床变量 | 患者级自然不完整 | missing-aware 中间融合 | 模态组合可不均衡 | 否 | 生存 | 小型私有 NSCLC 队列；需外部中心、时间泄漏和 MNAR 审计 |
 | EyeCLIP | 11 类眼科影像 + 少量报告 | 部分患者级配对 | 重建 + 图像/图像与图文对比 | 疾病、模态、图文共现 | 否 | 分类/检索/VQA | 中国预训练人群占主；共享表示可能压缩稀有模态独有信息 |
+| SMSN | T1/T1ce/T2/FLAIR MRI | 空间配准、人工缺失组合 | 顺序信息瓶颈 + 特异特征恢复 | 未专门建模 | 特征级 | 脑肿瘤分割 | BraTS 为主；随机顺序与变分 MI 代理未证明真实 MNAR 校准 |
+| AdaMM | T1/T1Gd/T2/FLAIR MRI | 空间配准、15 种可见组合 | 组合适配器 + 完整教师蒸馏 | 模态组合可不均衡 | 否 | 脑肿瘤分割 | 完整教师与人工缺失；组合适配器可能固化频率偏差 |
 
 ## 信息论及理论论文
 
@@ -44,6 +46,8 @@
 | CMCM | Gaussian-mixture 边缘 + Copula 联合依赖 | 复杂交互与缺失表示生成 | 是（MIMIC） | 条件分布补全和依赖建模 | Copula/边缘族假设；患者级可识别性未自动成立 |
 | LSMI | pointwise information、样本级 entropy estimator | 样本级 redundancy/unique/synergy | 否 | 为 PID 路由提供候选控制量 | 密度估计偏差；不是个体因果解释 |
 | InfMasking | 无限掩码 MI 代理 | 协同模式学习不足 | 否 | 缺失组合训练与 synergy 压力测试 | 代理提升不等于正式 PID synergy 增大 |
+| AFM2 | 多候选生成 + 自验证代理 | 基础模型的缺失图像/文本生成 | 否 | 生成范式 benchmark 与验证门控 | FID/MER 不代表病灶忠实度；同源自验证可能自洽幻觉 |
+| Fusion–Alignment | 动态 fusion/alignment 双层优化 | 弱模态激活与模态失衡 | 否 | 将对齐强度变成条件控制量 | 非医学 benchmark；对齐可能传播强模态捷径并删除 private 信息 |
 
 ## 最适合作为实验基线的组合
 
@@ -56,3 +60,5 @@
 - 自然缺失临床基线：Missing-aware NSCLC survival、CMCM。
 - 不均衡缺失与梯度平衡：PASSION、BALM、ANGA。
 - 样本级信息诊断：LSMI；协同训练压力测试：InfMasking。
+- 顺序融合与缺失 MRI：SMSN；弱组合蒸馏：AdaMM。
+- 生成式基础模型审计：AFM2；融合—对齐控制：Fusion–Alignment。

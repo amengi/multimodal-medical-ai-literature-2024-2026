@@ -1,6 +1,6 @@
 # 已核验的论文原文与代码链接
 
-核验日期：**2026-09-14**。优先提供正式 proceedings、出版社、PMLR、PubMed、OpenReview 或 arXiv 的论文落地页；落地页通常比直接 PDF 更稳定。GitHub 首页中的论文名称首先链接到本仓库 reading，原文入口集中列在这里。
+核验日期：**2026-09-21**。优先提供正式 proceedings、出版社、PMLR、PubMed、OpenReview 或 arXiv 的论文落地页；落地页通常比直接 PDF 更稳定。GitHub 首页中的论文名称首先链接到本仓库 reading，原文入口集中列在这里。
 
 ## 医学多模态论文
 
@@ -27,6 +27,8 @@
 | 19 | HEALNet | [NeurIPS 2024](https://proceedings.neurips.cc/paper_files/paper/2024/hash/765871e77d2ca65126d3d64d31aa6908-Abstract-Conference.html) | [Code](https://github.com/konst-int-i/healnet) |
 | 20 | Missing-aware NSCLC survival | [npj Digital Medicine](https://doi.org/10.1038/s41746-026-02783-3) | [PubMed](https://pubmed.ncbi.nlm.nih.gov/42332139/) · [Code](https://github.com/arco-group/Handling-Missing-Modalities-in-Multimodal-Survival-Prediction-for-Non-Small-Cell-Lung-Cancer) |
 | 21 | EyeCLIP | [npj Digital Medicine](https://doi.org/10.1038/s41746-025-01772-2) | [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC12181238/) · [Code](https://github.com/Michi-3000/EyeCLIP) |
+| 41 | SMSN | [ICLR 2026](https://iclr.cc/virtual/2026/poster/10006952) | [OpenReview](https://openreview.net/forum?id=tmV2sOZ8TV) · Code only verified in supplementary material |
+| 42 | AdaMM | [Medical Image Analysis](https://doi.org/10.1016/j.media.2026.104108) | [PubMed](https://pubmed.ncbi.nlm.nih.gov/42107353/) · [Code](https://github.com/Quanato607/AdaMM) |
 
 ## 可迁移方法与信息论
 
@@ -51,6 +53,8 @@
 | 38 | CMCM | [ICML 2025 / PMLR](https://proceedings.mlr.press/v267/wu25d.html) | [Code](https://github.com/HKU-MedAI/CMCM) |
 | 39 | LSMI | [ICML 2025 / PMLR](https://proceedings.mlr.press/v267/yang25aj.html) | [Code](https://github.com/GeWu-Lab/LSMI_Estimator) |
 | 40 | InfMasking | [NeurIPS 2025](https://proceedings.neurips.cc/paper_files/paper/2025/hash/16fe204707eac76cfd0e94296fe98cef-Abstract-Conference.html) | [Code](https://github.com/brightest66/InfMasking) |
+| 43 | AFM2 | [IEEE TPAMI](https://doi.org/10.1109/TPAMI.2026.3696678) | [PubMed](https://pubmed.ncbi.nlm.nih.gov/42184182/) · [Code](https://github.com/Guanzhou-Ke/AFM2) |
+| 44 | Fusion–Alignment | [IEEE TPAMI](https://doi.org/10.1109/TPAMI.2026.3729627) | [PubMed](https://pubmed.ncbi.nlm.nih.gov/42678858/) · Code not verified |
 
 ## 访问提示
 

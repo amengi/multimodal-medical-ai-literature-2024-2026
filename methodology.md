@@ -6,7 +6,7 @@
 
 ## 检索策略
 
-- 时间：滚动 24 个月；本轮为 2024-09-14—2026-09-14。
+- 时间：滚动 24 个月；本轮为 2024-09-21—2026-09-21。
 - 医学来源：Nature、Nature Medicine、Nature Communications、Medical Image Analysis、npj Digital Medicine、MICCAI、MIDL。
 - 通用 AI 来源：CVPR、ICCV、NeurIPS、ACM MM、WACV。
 - 关键词族：`missing modality`、`incomplete multimodal`、`modality dropout`、`modality imputation`、`long-tailed multimodal`、`modality combination imbalance`、`unpaired multimodal`、`shared private representation`、`multimodal medical fusion`。
@@ -25,7 +25,7 @@
 
 这些是定向简读，不等同于逐公式复现。对于未公开数据、未报告统计显著性或只在模拟缺失上验证的工作，笔记会明确指出证据边界。
 
-链接于 2026-09-14 重新核验。优先使用正式落地页而非直接 PDF；集中入口见 [paper-links.md](paper-links.md)。部分出版社或 OpenReview 页面可能有地区、Cookie 或浏览器验证限制，因此保留 PubMed、PMC、项目页或代码作为备用入口。
+链接于 2026-09-21 重新核验。优先使用正式落地页而非直接 PDF；集中入口见 [paper-links.md](paper-links.md)。部分出版社或 OpenReview 页面可能有地区、Cookie 或浏览器验证限制，因此保留 PubMed、PMC、项目页或代码作为备用入口。
 
 ## 三种“长尾”
 
@@ -41,3 +41,11 @@
 - **权威来源**：CVF Open Access、PMLR、NeurIPS Proceedings、MICCAI Open Access、Nature/npj Digital Medicine、PubMed/PMC；代码仅在论文页或对应公开仓库可交叉确认时记录。
 - **筛选**：标题/摘要候选 24 篇；去除已收录、非目标问题、只有普通融合而无现实缺失/长尾/非配对机制、以及元数据不足条目后，纳入 8 篇。
 - **年份处理**：NSCLC 工作以 npj Digital Medicine 2026 正式在线版本替代 2026-01 预印本；其余均按正式 proceedings 或期刊年份记录。
+
+## 2026-09-21 周检索记录
+
+- **检索式族**：精确任务（missing/incomplete modality medical）、同义扩展（modality dropout/imputation/distillation）、方法导向（information bottleneck/conditional MI/synergy/alignment）、venue 导向（ICLR/CVPR 2026、MICCAI 2025、MedIA/TPAMI）、综述与 benchmark。
+- **权威来源**：OpenReview/ICLR、Medical Image Analysis/PubMed、IEEE TPAMI DOI/PubMed、CVF、PMLR、MICCAI Open Access；代码仅在论文正文、PubMed 或作者仓库可交叉确认时记录。
+- **筛选**：标题/摘要候选 19 篇；排除已收录、仅预印本、普通融合但未分析目标机制、非高价值 venue 与元数据不足条目后，纳入 4 篇。
+- **本轮新增**：SMSN（医学顺序信息瓶颈）、AdaMM（缺失 MRI 蒸馏与六类策略比较）、AFM2（基础模型缺失模态生成 benchmark）、Fusion–Alignment（动态融合/对齐与弱模态激活）。
+- **状态处理**：AdaMM 以 MedIA 2026 正式版本替代 arXiv；AFM2 与 Fusion–Alignment 以 TPAMI DOI/期刊状态为准；SMSN 以 ICLR 2026 正式 OpenReview 条目为准。

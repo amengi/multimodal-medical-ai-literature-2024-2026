@@ -11,7 +11,7 @@
 
 | 方向 | 信息论视角 | 最值得测量的量 | 直接启发 |
 |---|---|---|---|
-| 模态融合 | 融合应保留独有与协同信息，而非只扩大冗余 | PID、条件互信息 | InfoBridge、PID framework、I²M² |
+| 模态融合 | 融合应保留独有与协同信息，而非只扩大冗余 | PID、条件互信息 | InfoBridge、PID framework、I²M²、SMSN |
 | 模态缺失 | 缺失模态中只有冗余部分原则上可从现有模态恢复 | \(I(X_m;Y\mid X_{obs})\)、预测熵 | DeepIMV、OMIB、HEALNet |
 | 长尾/模态竞争 | 头部或强模态可能压制弱模态的梯度和任务信息 | 各模态任务 MI、条件 MI 下界 | OMIB、MCR |
 | 非配对学习 | 没有样本级联合分布时，普通 MI 目标未必可识别 | 分布级依赖、少量锚点下的 CMI | Identifiable SCA、PID framework |
@@ -33,6 +33,7 @@
 6. [Multimodal IB alignment](readings/37-multimodal-ib-alignment.md)：理解对齐与 private-information 保留之间的张力。
 7. [CMCM](readings/38-cmcm.md) 与 [LSMI](readings/39-lsmi.md)：分别从联合分布和样本级交互补足条件建模。
 8. [InfMasking](readings/40-infmasking.md)：把“增强 synergy”的算法主张与可测 PID 证据分开审计。
+9. [SMSN](readings/41-smsn.md) 与 [Fusion–Alignment](readings/44-fusion-alignment.md)：比较顺序压缩和动态对齐；重点检查它们是否保留任务相关 private 信息。
 
 ## 可执行的研究假设
 
@@ -61,6 +62,11 @@ CMCM 给出联合潜变量分布，路线 B 可据此输出 $p(z_m\mid z_{obs},R
 ### F. 样本级交互只作为可验证控制信号
 
 LSMI 将 redundancy/unique/synergy 下沉到样本级，适合给路由器提供候选标签；InfMasking 则可作为协同训练干预。二者组合时，必须先检验 LSMI 分数能否预测“新增一个真实模态”带来的边际收益，并报告估计器跨 batch、表示尺度和站点的稳定性。若不能预测真实干预收益，则不得把分数当作个体临床解释。
+
+### G. 顺序瓶颈不是固定序列
+
+SMSN 表明顺序融合可作为并行融合的替代，但随机重排没有把临床价值、质量与成本纳入顺序。可定义候选模态的条件价值代理
+\(V_m=\widehat I(X_m;Y\mid X_R)-\lambda c_m-\mu u_m\)，其中 \(c_m\) 是检查成本、\(u_m\) 是估计不确定性；只用该代理选择融合/采集顺序，不把它宣称为真实 MI。必须用真实“新增模态”干预、顺序置换和外部中心复现验证 \(V_m\) 是否预测风险下降。
 
 ## 实验注意事项
 

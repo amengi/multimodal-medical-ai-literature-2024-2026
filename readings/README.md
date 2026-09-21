@@ -6,10 +6,10 @@
 
 | 研究路线 | 核心论文组合 | 每篇论文承担的角色 |
 |---|---|---|
-| A. MNAR × 三重长尾 × 信息覆盖路由 | UniMIX-AD + PASSION + SimMLM + BALM + MCR + LSMI | 组合图、缺失不平衡、动态专家、梯度平衡、竞争诊断、样本级信息 |
-| B. 可拒绝的非幻觉补全 | MUST + MADAT + M³FeCon + DeepIMV + CMCM + NSCLC missing-aware | shared/private、生成、重建、条件分布、不生成现实基线 |
+| A. MNAR × 三重长尾 × 信息覆盖路由 | UniMIX-AD + PASSION + SimMLM + BALM + AdaMM + MCR + LSMI | 组合图、缺失不平衡、动态专家、蒸馏、竞争诊断、样本级信息 |
+| B. 可拒绝的非幻觉补全 | MUST + MADAT + M³FeCon + DeepIMV + CMCM + AFM2 + NSCLC missing-aware | shared/private、生成审计、条件分布、不生成现实基线 |
 | C. 少量锚点可识别非配对学习 | MUSK + IPIC + UNIALIGN + Identifiable SCA + I²M² | 单模态规模化预训练、组标签、无配对对齐、可识别条件、依赖分解 |
-| D. PID 引导自适应融合 | PID + LSMI + InfoBridge + HEALNet + InfMasking | 群体/样本诊断、保护独有信息、异质融合、协同训练 |
+| D. PID 引导自适应融合 | PID + LSMI + InfoBridge + HEALNet + InfMasking + SMSN + Fusion–Alignment | 群体/样本诊断、保护独有信息、顺序瓶颈、动态对齐 |
 | E. 长尾医学 VLM | EyeCLIP + RadDiag + CXR-LT + MUSK + TITAN + Neglected Tails | 眼科与放射长尾、基础模型、尾部机制、模态依赖审计 |
 
 ## 医学论文
@@ -35,6 +35,8 @@
 19. [HEALNet](32-healnet.md) — 异质生物医学数据、缺失模态与生存分析
 20. [Missing-aware NSCLC survival](35-nsclc-missing-survival.md) — CT/WSI/临床变量的自然缺失生存预测
 21. [EyeCLIP](36-eyeclip.md) — 11 类眼科模态、部分文本与稀有病长尾
+22. [SMSN](41-smsn.md) — 顺序信息瓶颈与缺失 MRI 分割
+23. [AdaMM](42-adamm.md) — 15 种模态组合的知识蒸馏与可靠性
 
 ## 可迁移的非医学论文
 
@@ -45,6 +47,8 @@
 24. [The Neglected Tails in Vision-Language Models](23-neglected-tails.md)
 25. [ANGA](33-anga.md) — 重建样本与完整样本的梯度对齐
 26. [BALM](34-balm.md) — 不均衡缺失率下的特征与梯度平衡
+27. [AFM2](43-afm2.md) — 基础模型生成缺失模态的系统评测与自验证
+28. [Fusion–Alignment](44-fusion-alignment.md) — 动态平衡任务融合与弱模态对齐
 
 ## 信息论与多模态机制
 
