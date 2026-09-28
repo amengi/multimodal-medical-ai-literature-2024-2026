@@ -6,11 +6,12 @@
 
 | 研究路线 | 核心论文组合 | 每篇论文承担的角色 |
 |---|---|---|
-| A. MNAR × 三重长尾 × 信息覆盖路由 | UniMIX-AD + PASSION + SimMLM + BALM + AdaMM + MCR + LSMI | 组合图、缺失不平衡、动态专家、蒸馏、竞争诊断、样本级信息 |
-| B. 可拒绝的非幻觉补全 | MUST + MADAT + M³FeCon + DeepIMV + CMCM + AFM2 + NSCLC missing-aware | shared/private、生成审计、条件分布、不生成现实基线 |
-| C. 少量锚点可识别非配对学习 | MUSK + IPIC + UNIALIGN + Identifiable SCA + I²M² | 单模态规模化预训练、组标签、无配对对齐、可识别条件、依赖分解 |
+| A. MNAR × 三重长尾 × 信息覆盖路由 | UniMIX-AD + PASSION + SimMLM + BALM + AdaMM + BrainAnytime + CSD | 组合图、缺失不平衡、动态专家、类别条件路由、任意模态预训练 |
+| B. 可拒绝的非幻觉补全 | MUST + EMMS + UniBrain + PS-MIT + CMCM + AFM2 + NSCLC missing-aware | shared/private、空证据基线、后验生成、生成审计、现实缺失 |
+| C. 锚点图驱动的非配对学习 | MUSK + IPIC + Identifiable SCA + OT-Coupled Flow + MUST-VS | 无配对预训练、组标签、OT 伪配对、不完整配对、可识别边界 |
 | D. PID 引导自适应融合 | PID + LSMI + InfoBridge + HEALNet + InfMasking + SMSN + Fusion–Alignment | 群体/样本诊断、保护独有信息、顺序瓶颈、动态对齐 |
 | E. 长尾医学 VLM | EyeCLIP + RadDiag + CXR-LT + MUSK + TITAN + Neglected Tails | 眼科与放射长尾、基础模型、尾部机制、模态依赖审计 |
+| F. 联邦 MNAR 与站点长尾 | ProMoE-FL + EMMS + BALM + Missing-aware NSCLC | 客户端原型、证据回退、梯度平衡、真实检查倾向 |
 
 ## 医学论文
 
@@ -37,6 +38,14 @@
 21. [EyeCLIP](36-eyeclip.md) — 11 类眼科模态、部分文本与稀有病长尾
 22. [SMSN](41-smsn.md) — 顺序信息瓶颈与缺失 MRI 分割
 23. [AdaMM](42-adamm.md) — 15 种模态组合的知识蒸馏与可靠性
+24. [EMMS](45-emms.md) — 缺失模态的空证据与生存不确定性
+25. [BrainAnytime](46-brainanytime.md) — 34,899 个脑影像扫描上的任意模态预训练
+26. [CSD](47-csd.md) — 类别感知的共享/特异语义解耦
+27. [ProMoE-FL](48-promoe-fl.md) — 联邦 non-IID 与系统性模态缺失
+28. [UniBrain](49-unibrain.md) — 统一 MRI 补全和医学理解
+29. [OT-Coupled Flow](50-ot-coupled-flow.md) — 无配对 CT→TEE 与解剖一致性
+30. [PS-MIT](51-ps-mit.md) — 后验采样生成任意缺失 MRI
+31. [MUST-VS](52-must-virtual-staining.md) — 不完整配对多染色虚拟生成
 
 ## 可迁移的非医学论文
 

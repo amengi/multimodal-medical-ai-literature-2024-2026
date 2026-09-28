@@ -34,6 +34,7 @@
 7. [CMCM](readings/38-cmcm.md) 与 [LSMI](readings/39-lsmi.md)：分别从联合分布和样本级交互补足条件建模。
 8. [InfMasking](readings/40-infmasking.md)：把“增强 synergy”的算法主张与可测 PID 证据分开审计。
 9. [SMSN](readings/41-smsn.md) 与 [Fusion–Alignment](readings/44-fusion-alignment.md)：比较顺序压缩和动态对齐；重点检查它们是否保留任务相关 private 信息。
+10. [EMMS](readings/45-emms.md)、[BrainAnytime](readings/46-brainanytime.md) 与 [PS-MIT](readings/51-ps-mit.md)：把空证据、任意模态预训练和条件后验放在同一风险—覆盖坐标系中比较。
 
 ## 可执行的研究假设
 
@@ -67,6 +68,10 @@ LSMI 将 redundancy/unique/synergy 下沉到样本级，适合给路由器提供
 
 SMSN 表明顺序融合可作为并行融合的替代，但随机重排没有把临床价值、质量与成本纳入顺序。可定义候选模态的条件价值代理
 \(V_m=\widehat I(X_m;Y\mid X_R)-\lambda c_m-\mu u_m\)，其中 \(c_m\) 是检查成本、\(u_m\) 是估计不确定性；只用该代理选择融合/采集顺序，不把它宣称为真实 MI。必须用真实“新增模态”干预、顺序置换和外部中心复现验证 \(V_m\) 是否预测风险下降。
+
+### H. 空证据是缺失模态的零假设
+
+令 \(X_R\) 为已观测模态、\(X_m\) 为缺失模态、\(R\) 为检查获取模式。EMMS 的 vacuous evidence 给出“模型对缺失内容不作猜测”的零假设；PS-MIT/CMCM 的后验样本只能代表 \(p(X_m\mid X_R,R)\) 的模型近似，而不是患者真值。任何补全分支都应在相同 coverage 下显著优于仅观测空证据，并在完整病例回填中满足覆盖校准；若生成证据不能降低选择性风险，就关闭该分支。BrainAnytime 式共享预训练可以改善 \(X_R\) 的表征，但不自动降低不可约条件独有信息 \(I(X_m;Y\mid X_R,R)\)。
 
 ## 实验注意事项
 

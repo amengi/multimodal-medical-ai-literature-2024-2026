@@ -8,7 +8,7 @@
 - 非配对或弱配对学习（unpaired/weakly paired learning）
 - 信息瓶颈、条件互信息与信息分解（information theory）
 
-当前滚动检索窗口为 **2024-09-21 至 2026-09-21**。正式发表于 MICCAI、CVPR、ICML、ICLR、NeurIPS 等会议的论文按 proceedings/会议时间纳入。另收录少量略早但具有直接方法启发的论文，并单独标明。
+当前滚动检索窗口为 **2024-09-28 至 2026-09-28**。正式发表于 MICCAI、CVPR、ECCV、ICML、ICLR、NeurIPS 等会议的论文按 proceedings/会议时间纳入。另收录少量略早但具有直接方法启发的论文，并单独标明。
 
 ## 快速入口
 
@@ -22,10 +22,10 @@
 
 ## 优先阅读路线
 
-1. **真实缺失与不平衡**：PASSION → SimMLM → UniMIX-AD → BALM → AdaMM → NSCLC missing-aware survival
-2. **共享/私有表示与生成补全**：DRIM → MUST → MADAT → AFM2
+1. **真实缺失与不平衡**：PASSION → SimMLM → UniMIX-AD → BALM → AdaMM → EMMS → BrainAnytime
+2. **共享/私有表示与生成补全**：DRIM → MUST → MADAT → AFM2 → UniBrain → PS-MIT
 3. **类别长尾**：RadDiag → CXR-LT → CLIMD
-4. **非配对学习**：UNest → MUSK → UNIALIGN → Identifiable SCA
+4. **非配对/不完整配对学习**：UNest → MUSK → UNIALIGN → Identifiable SCA → OT-Coupled Flow → MUST-VS
 5. **信息论与融合机制**：PID framework → OMIB → InfoBridge → MCR → LSMI → CMCM → SMSN
 
 ## 核心论文
@@ -62,9 +62,17 @@
 | 蒸馏与弱模态组合 | [AdaMM](readings/42-adamm.md) |
 | 基础模型缺失模态生成审计 | [AFM2](readings/43-afm2.md) |
 | 融合—对齐动态平衡 | [Fusion–Alignment](readings/44-fusion-alignment.md) |
+| 缺失模态的证据不确定性 | [EMMS](readings/45-emms.md) |
+| 任意脑影像模态预训练 | [BrainAnytime](readings/46-brainanytime.md) |
+| 类别感知语义解耦 | [CSD](readings/47-csd.md) |
+| 联邦缺失模态专家路由 | [ProMoE-FL](readings/48-promoe-fl.md) |
+| 统一 MRI 补全与理解 | [UniBrain](readings/49-unibrain.md) |
+| 无配对 CT→TEE 翻译 | [OT-Coupled Flow](readings/50-ot-coupled-flow.md) |
+| 任意缺失 MRI 后验采样 | [PS-MIT](readings/51-ps-mit.md) |
+| 不完整配对虚拟染色 | [MUST-VS](readings/52-must-virtual-staining.md) |
 
 ## 使用说明
 
-目前共收录 **44 篇** reading。单篇笔记刻意保持简短，只保留论文事实、关键边界和一条可迁移启发；跨论文的组合方式、创新假设、模型原型、关键实验与失败判据集中在 [innovation-roadmap.md](innovation-roadmap.md)。未在论文主页或正文中核验的代码会标记为“未核验”。原文链接以出版社、正式 proceedings、PMLR、OpenReview、PubMed 或 arXiv 落地页为主，并在 [paper-links.md](paper-links.md) 集中维护。
+目前共收录 **52 篇** reading。单篇笔记刻意保持简短，只保留论文事实、关键边界和一条可迁移启发；跨论文的组合方式、创新假设、模型原型、关键实验与失败判据集中在 [innovation-roadmap.md](innovation-roadmap.md)。未在论文主页或正文中核验的代码会标记为“未核验”。原文链接以出版社、正式 proceedings、PMLR、OpenReview、PubMed 或 arXiv 落地页为主，并在 [paper-links.md](paper-links.md) 集中维护。
 
 本仓库仅保存阅读笔记和公开链接，不重新分发受版权保护的论文全文。论文内容和图表版权归原作者及出版方所有。

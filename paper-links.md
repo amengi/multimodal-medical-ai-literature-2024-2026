@@ -1,6 +1,6 @@
 # 已核验的论文原文与代码链接
 
-核验日期：**2026-09-21**。优先提供正式 proceedings、出版社、PMLR、PubMed、OpenReview 或 arXiv 的论文落地页；落地页通常比直接 PDF 更稳定。GitHub 首页中的论文名称首先链接到本仓库 reading，原文入口集中列在这里。
+核验日期：**2026-09-28**。优先提供正式 proceedings、出版社、PMLR、PubMed、OpenReview 或 arXiv 的论文落地页；落地页通常比直接 PDF 更稳定。GitHub 首页中的论文名称首先链接到本仓库 reading，原文入口集中列在这里。
 
 ## 医学多模态论文
 
@@ -29,6 +29,14 @@
 | 21 | EyeCLIP | [npj Digital Medicine](https://doi.org/10.1038/s41746-025-01772-2) | [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC12181238/) · [Code](https://github.com/Michi-3000/EyeCLIP) |
 | 41 | SMSN | [ICLR 2026](https://iclr.cc/virtual/2026/poster/10006952) | [OpenReview](https://openreview.net/forum?id=tmV2sOZ8TV) · Code only verified in supplementary material |
 | 42 | AdaMM | [Medical Image Analysis](https://doi.org/10.1016/j.media.2026.104108) | [PubMed](https://pubmed.ncbi.nlm.nih.gov/42107353/) · [Code](https://github.com/Quanato607/AdaMM) |
+| 45 | EMMS | [MICCAI 2026](https://papers.miccai.org/miccai-2026/0355-Paper6476.html) | [Code](https://github.com/YuchengXing99/EMMS) |
+| 46 | BrainAnytime | [MICCAI 2026 Oral](https://papers.miccai.org/miccai-2026/0119-Paper3498.html) | [Code](https://github.com/guangqianyang/BrainAnytime) |
+| 47 | CSD | [MICCAI 2026](https://papers.miccai.org/miccai-2026/1073-Paper1452.html) | Code not verified |
+| 48 | ProMoE-FL | [MICCAI 2026](https://papers.miccai.org/miccai-2026/0817-Paper1724.html) | [Code](https://github.com/bhattarailab/ProMoE-FL) |
+| 49 | UniBrain | [MICCAI 2026](https://papers.miccai.org/miccai-2026/1110-Paper2626.html) | [Code](https://github.com/zhiyuns/UniBrain) |
+| 50 | OT-Coupled Flow | [MICCAI 2026](https://papers.miccai.org/miccai-2026/0750-Paper0555.html) | [Code](https://github.com/yunhaoli24/OTC-Flow) |
+| 51 | PS-MIT | [ECCV 2026 Accepted Papers](https://eccv.ecva.net/Conferences/2026/AcceptedPapers) | [arXiv](https://arxiv.org/abs/2607.18763) · [Code](https://github.com/jongdory/PS-MIT) |
+| 52 | MUST-VS | [IEEE TMI](https://doi.org/10.1109/TMI.2026.3709810) | [PubMed](https://pubmed.ncbi.nlm.nih.gov/42397993/) · [Code](https://github.com/JiaxinZhuang/MUST) |
 
 ## 可迁移方法与信息论
 

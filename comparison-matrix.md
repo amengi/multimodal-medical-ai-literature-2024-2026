@@ -27,6 +27,14 @@
 | EyeCLIP | 11 类眼科影像 + 少量报告 | 部分患者级配对 | 重建 + 图像/图像与图文对比 | 疾病、模态、图文共现 | 否 | 分类/检索/VQA | 中国预训练人群占主；共享表示可能压缩稀有模态独有信息 |
 | SMSN | T1/T1ce/T2/FLAIR MRI | 空间配准、人工缺失组合 | 顺序信息瓶颈 + 特异特征恢复 | 未专门建模 | 特征级 | 脑肿瘤分割 | BraTS 为主；随机顺序与变分 MI 代理未证明真实 MNAR 校准 |
 | AdaMM | T1/T1Gd/T2/FLAIR MRI | 空间配准、15 种可见组合 | 组合适配器 + 完整教师蒸馏 | 模态组合可不均衡 | 否 | 脑肿瘤分割 | 完整教师与人工缺失；组合适配器可能固化频率偏差 |
+| EMMS | WSI + RNA | 患者级配对后人工缺失 | DS/GRFN 证据融合，缺失给空证据 | 未专门建模 | 否 | 生存 | 四个 TCGA 队列；真实 MNAR、外部校准与对称 KL 风险待检验 |
+| BrainAnytime | T1/T2/FLAIR/PET | 跨队列部分可用、空间标准化 | 共享 Multi-MAE3D + reciprocal distillation | 模态组合高度不均衡 | 重建预训练 | AD 分期/分割/预测 | 34,899 scans；AD atlas 先验和患者/重复扫描泄漏需审计 |
+| CSD | CXR+文本、CXR+表格 | 完整数据人工遮挡 | 类别查询的 shared/specific 语义 | 类别 × 组合 | 否 | 多标签诊断 | 对称模拟缺失；类别查询不等于正式 PID，真实缺失未验证 |
+| ProMoE-FL | CXR + 报告 | 多客户端、站点系统性缺失 | 客户端原型条件 MoE 补特征 | 客户端/标签/模态 | 特征级 | 联邦诊断 | 原型可能泄漏站点并偏向大客户端；不是患者报告恢复 |
+| UniBrain | 多序列脑 MRI + 报告 | case-level 弱配对 | 自回归联合补全与理解 | 未专门建模 | 图像级 | 生成/诊断 | 2D slice、case report；OOD、病灶忠实度与患者级切分需加强 |
+| OT-Coupled Flow | 3D CT + 2D TEE | 完全不配对 | OT 伪对应 + flow matching | 无 | 图像级 | TEE 模拟 | OT plan 非患者对应；真实 TEE 下游、标准差和设备外测不足 |
+| PS-MIT | 多序列 MRI | 完整训练、任意人工缺失 | 联合 flow prior + measurement-guided posterior | 组合可不均衡 | 图像级后验采样 | 翻译/分割 | BraTS/IXI；需多样本覆盖、真实 MNAR 和病灶假阳性验证 |
+| MUST-VS | H&E + 多染色病理 | 不完整 patch 配对 | 协同去噪 + 伪标签 | 配对缺失 × 病灶类别 | 图像级 | 虚拟染色 | 仅结构相关染色；相邻 patch 泄漏与稀有病灶幻觉需审计 |
 
 ## 信息论及理论论文
 
@@ -51,14 +59,15 @@
 
 ## 最适合作为实验基线的组合
 
-- 任意缺失、非生成：SimMLM、MoRA、DRIM。
+- 任意缺失、非生成：SimMLM、MoRA、DRIM、BrainAnytime、EMMS。
 - 不均衡缺失率：PASSION、UniMIX-AD。
-- 生成式补全：MUST、MADAT、M³FeCon。
+- 生成式补全：MUST、MADAT、M³FeCon、UniBrain、PS-MIT。
 - 病理–组学生存：PG-MLIF、DRIM、M²Surv、MUST。
-- 非配对：UNest、MulModSeg、MUSK、IPIC。
+- 非配对/不完整配对：UNest、MulModSeg、MUSK、IPIC、OT-Coupled Flow、MUST-VS。
 - 类别长尾：RadDiag、CXR-LT、CLIMD。
 - 自然缺失临床基线：Missing-aware NSCLC survival、CMCM。
 - 不均衡缺失与梯度平衡：PASSION、BALM、ANGA。
 - 样本级信息诊断：LSMI；协同训练压力测试：InfMasking。
 - 顺序融合与缺失 MRI：SMSN；弱组合蒸馏：AdaMM。
 - 生成式基础模型审计：AFM2；融合—对齐控制：Fusion–Alignment。
+- 联邦系统性缺失：ProMoE-FL；类别条件缺失诊断：CSD。
