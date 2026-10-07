@@ -6,12 +6,13 @@
 
 | 研究路线 | 核心论文组合 | 每篇论文承担的角色 |
 |---|---|---|
-| A. MNAR × 三重长尾 × 信息覆盖路由 | UniMIX-AD + PASSION + SimMLM + BALM + AdaMM + BrainAnytime + CSD | 组合图、缺失不平衡、动态专家、类别条件路由、任意模态预训练 |
+| A. MNAR × 三重长尾 × 信息覆盖路由 | UniMIX-AD + BALM + ShapKO + AMAF-Net + MMA-LTS | 组合长尾、效用驱动 knockout、真实变量缺失、组合条件校准 |
 | B. 可拒绝的非幻觉补全 | MUST + EMMS + UniBrain + PS-MIT + CMCM + AFM2 + NSCLC missing-aware | shared/private、空证据基线、后验生成、生成审计、现实缺失 |
 | C. 锚点图驱动的非配对学习 | MUSK + IPIC + Identifiable SCA + OT-Coupled Flow + MUST-VS | 无配对预训练、组标签、OT 伪配对、不完整配对、可识别边界 |
-| D. PID 引导自适应融合 | PID + LSMI + InfoBridge + HEALNet + InfMasking + SMSN + Fusion–Alignment | 群体/样本诊断、保护独有信息、顺序瓶颈、动态对齐 |
+| D. PID 引导自适应融合 | PID + LSMI + InfoBridge + Φ-OMNI + SYNPRED + InfMasking | 正式/经验 synergy、群体/样本诊断、独有信息保护、估计器审计 |
 | E. 长尾医学 VLM | EyeCLIP + RadDiag + CXR-LT + MUSK + TITAN + Neglected Tails | 眼科与放射长尾、基础模型、尾部机制、模态依赖审计 |
 | F. 联邦 MNAR 与站点长尾 | ProMoE-FL + EMMS + BALM + Missing-aware NSCLC | 客户端原型、证据回退、梯度平衡、真实检查倾向 |
+| G. 成本感知主动检查获取 | SAGEAgent + ShapKO + MMA-LTS + EMMS + SMSN | 顺序价值、群体边际效用、组合校准、空证据回退 |
 
 ## 医学论文
 
@@ -46,6 +47,13 @@
 29. [OT-Coupled Flow](50-ot-coupled-flow.md) — 无配对 CT→TEE 与解剖一致性
 30. [PS-MIT](51-ps-mit.md) — 后验采样生成任意缺失 MRI
 31. [MUST-VS](52-must-virtual-staining.md) — 不完整配对多染色虚拟生成
+32. [ShapKO](53-shapko.md) — Shapley 效用驱动的动态模态 knockout
+33. [MMA-LTS](54-mma-lts.md) — 缺失组合与空间条件的置信度校准
+34. [SAGEAgent](55-sageagent.md) — 成本感知的顺序模态获取
+35. [Φ-OMNI](56-phi-omni.md) — PID 启发的病理协同信息预训练
+36. [RMoE](57-rmoe.md) — 患者检索与可靠性专家的缺失生存预测
+37. [SYNPRED](58-synpred.md) — 经验协同多模态 VAE 与缺失测试
+38. [AMAF-Net](59-amaf-net.md) — 真实临床变量缺失与类别长尾
 
 ## 可迁移的非医学论文
 

@@ -351,6 +351,46 @@
 
 **外部验证与反证。** 在外部设备/医院测试，结合下游分割/诊断、病理医师或超声专家审计、校准和 risk–coverage，而不只看 PSNR/FID。若图连通性不能预测方法排序，或锚点洗牌后表现不降，则模型没有利用所声称的跨模态对应；主张必须退回分布级生成。
 
+## 2026-10-08：三条新增、可证伪的研究连接
+
+### Idea 8：组合校准约束下的条件检查价值
+
+**科学问题。** ShapKO 给出群体级模态边际效用，SAGEAgent 决定是否继续获取下一项检查，MMA-LTS 则证明可靠性取决于具体缺失组合而非模态数量。现有方法没有把“组合条件校准”作为主动获取策略的安全约束。
+
+**假设。** 对患者 \(i\)、已见集合 \(R\) 与候选检查 \(m\)，真实净价值
+\(V_{i,m}=\mathbb E[\ell(f_R,Y)-\ell(f_{R\cup m},Y)\mid X_R,R]-\lambda c_m\)
+可以由病例状态、组合条件不确定性与群体 Shapley utility 联合预测；只有在校准后的 \(P(V_{i,m}>0)\) 超过阈值时获取检查，可在预设 non-inferiority margin 内降低成本，并改善尾部组合覆盖。
+
+**最小模型与训练。** 冻结任意缺失主干；在完整病例上逐项遮挡并回填真实模态，构造 \(V_{i,m}\) 监督轻量 value head。ShapKO 只生成训练期 knockout proposal，MMA-LTS 风格组合 token 校准 value/任务置信度。训练损失仅含任务损失、value ranking/regression 和 group calibration；成本不伪装成 MI。推理按临床允许顺序执行 ACQUIRE/STOP，LLM 可生成解释但不控制策略。
+
+**基线与消融。** 全检查、固定顺序、随机、uncertainty threshold、SAGEAgent、ShapKO、oracle \(V\)；消融 Shapley、组合 token、校准、成本和停止动作。报告 C-index/AUPRC、ECE/Brier、每组合 coverage、平均/最坏成本、risk–coverage 与 decision-curve net benefit。
+
+**外部验证与反证。** 外部医院重估成本但冻结 value head，并按真实 MNAR、类别 × 组合长尾分层；做 mask 禁用、顺序置换、成本翻倍和 high-uncertainty/low-value 压力测试。若 \(\hat V\) 不能预测真实新增检查收益，或成本下降仅来自超出 non-inferiority margin 的性能损失，则主动获取主张失败。
+
+### Idea 9：Synergy 先审计、后进入模型
+
+**科学问题。** Φ-OMNI 用 PID 启发目标优化协同，SYNPRED 明确只声称经验 synergy；两者与 LSMI/InfoBridge 的关系尚未由同一组真实干预验证。最大的风险是把报告标签泄漏、RNA 蒸馏或普通容量增益误称为不可约协同信息。
+
+**假设。** 对 \(X_I\)（影像）、\(X_G\)（组学）、\(Y\)（任务）与表示 \(Z\)，稳定的协同代理应同时满足：在已知生成机制的合成数据上跟随 PID 真值；在真实数据上预测联合输入相对单模态的额外风险下降；在文本/标签洗牌和站点外测后仍成立。只有满足三项，synergy 才值得驱动 fusion router。
+
+**最小模型与损失。** 先冻结等容量影像/组学编码器，离线比较 ΦID、LSMI、条件 MI 变分界和简单 logit interaction；控制器仅在诊断稳定时选择 late fusion、private branch 或 cross-attention。主训练保持任务损失 + 一个经校准的 synergy ranking loss；不同时堆叠正交、对比、重建和多个 MI 正则。推理时只使用部署可得模态，缺失组学走单模态回退。
+
+**基线与消融。** Image-only、omics-only、concat、InfoBridge、SYNPRED、Φ-OMNI、随机路由与 oracle interaction；消融报告、组学、PID 代理、private branch 和路由。改变 PID 定义、估计器、batch size、负样本与变分族，并报告 bootstrap 稳定性。
+
+**外部验证与反证。** 患者级划分，严格清洗报告中的诊断/分子词，跨 TCGA→CPTAC/独立癌种；使用报告标签洗牌、患者错配、模态置换和容量匹配。若 synergy 分数对真实联合增益的预测不优于类别频率/置信度，或不同估计器给出相反排序，则它只能保留为探索性分析。
+
+### Idea 10：检索证据的空证据回退与尾部校准
+
+**科学问题。** RMoE/M²Surv 用相似患者补偿缺失模态，但检索结果常被称为 imputation；EMMS 提供了更安全的空证据零假设。需要判断的是：何时邻居证据在尾部疾病、尾部组合与跨站点下真正增加信息，而不是复制头部人群。
+
+**假设。** 检索分支相对观测-only 空证据的收益由邻居支持度、跨模态一致性、类别/组合稀有度和站点距离共同决定；以这些量校准 gate，并在不可靠时回退，能改善 worst-group risk 而不制造患者级恢复主张。
+
+**最小模型与训练。** 训练折内建立患者库，分别检索 WSI、组学和临床邻居；每个邻居保持来源与站点标识。gate 在 observed-only、retrieval ensemble、abstain 三种动作中选择。损失为主任务、检索收益 ranking、组合条件 calibration 与选择性风险；不优化像素/latent 重建。推理禁止更新库，所有邻居必须来自训练集。
+
+**基线与消融。** RMoE、M²Surv、均值/KNN 插补、masked fusion、EMMS、oracle nearest same-patient；消融标签辅助、可靠度、站点距离、尾部惩罚和回退。加入邻居标签洗牌、患者 ID 泄漏检查、随机库、跨站点库和头/尾邻居比例控制。
+
+**外部验证与反证。** 在真实 MNAR 队列报告 disease × modality-combination × site 的 C-index/AUPRC、ECE/Brier、risk–coverage、邻居纯度与隐私攻击；外部库单独评估。若 gate 不能区分有害邻居，或收益只存在于同站点头部亚组，则检索分支应关闭并退回空证据。
+
 ## 五条路线如何取舍
 
 | 路线 | 新颖性潜力 | 数据门槛 | 理论风险 | 临床价值 | 推荐起点 |

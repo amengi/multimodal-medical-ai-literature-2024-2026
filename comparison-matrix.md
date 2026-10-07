@@ -35,6 +35,13 @@
 | OT-Coupled Flow | 3D CT + 2D TEE | 完全不配对 | OT 伪对应 + flow matching | 无 | 图像级 | TEE 模拟 | OT plan 非患者对应；真实 TEE 下游、标准差和设备外测不足 |
 | PS-MIT | 多序列 MRI | 完整训练、任意人工缺失 | 联合 flow prior + measurement-guided posterior | 组合可不均衡 | 图像级后验采样 | 翻译/分割 | BraTS/IXI；需多样本覆盖、真实 MNAR 和病灶假阳性验证 |
 | MUST-VS | H&E + 多染色病理 | 不完整 patch 配对 | 协同去噪 + 伪标签 | 配对缺失 × 病灶类别 | 图像级 | 虚拟染色 | 仅结构相关染色；相邻 patch 泄漏与稀有病灶幻觉需审计 |
+| ShapKO | MRI / EHR+CXR+文本 / WSI+omics 等 | 结构缺失 + 人工 knockout | Shapley utility 自适应 masking | 模态/组合效用不均衡 | 否 | 分类/生存 | utility 非 MI/因果价值；精确枚举指数复杂，需真实 MNAR 和最坏组验证 |
+| MMA-LTS | T1/T1ce/T2/FLAIR MRI | 完整数据人工遮挡 | 组合 token + voxel difficulty 的温度场 | 组合条件校准 | 否 | 脑肿瘤分割 | post-hoc；未见组合、真实缺失与外部扫描仪的条件 coverage 未保证 |
+| SAGEAgent | demographics + MRI + WSI + genomics | 固定临床获取顺序 | LLM + uncertainty + episodic/semantic memory 主动获取 | 获取成本/组合 | 否 | 生存与检查决策 | 170 个完整 glioma 病例；无外部验证，成本权重与策略迁移未知 |
+| Φ-OMNI | WSI + transcriptomics + report | 预训练配对，测试仅 WSI | SIB + ΦID 协同信息蒸馏 | 少样本任务 | 否 | 表征/分类 | PID 代理非无偏真值；报告标签泄漏、文本清洗与配对组合消融需审计 |
+| RMoE | WSI + genomics | 训练/测试不完整 | 双向患者检索 + reliability-aware MoE | 缺失组合 | 检索式 | 生存 | 三个 TCGA、固定 60% 缺失；risk-label 检索捷径、MNAR 与外部库未验证 |
+| SYNPRED | DCE-MRI + RNA | 配对训练、测试可缺失 | shared/unimodal/instance latent VAE | 模态可用率 | latent 生成 | 治疗反应 | synergy 为经验增益非正式 PID；单任务、小样本与 RNA 主导限制外推 |
+| AMAF-Net | 非增强 CT + 临床变量 | 真实变量级不完整 | missing pattern 条件融合 + prototype regularization | 类别 × missing pattern | 否 | 四类肾上腺肿瘤 | 1,108 名单中心；mask 可能编码流程/标签，外部与时间验证不足 |
 
 ## 信息论及理论论文
 
@@ -56,18 +63,23 @@
 | InfMasking | 无限掩码 MI 代理 | 协同模式学习不足 | 否 | 缺失组合训练与 synergy 压力测试 | 代理提升不等于正式 PID synergy 增大 |
 | AFM2 | 多候选生成 + 自验证代理 | 基础模型的缺失图像/文本生成 | 否 | 生成范式 benchmark 与验证门控 | FID/MER 不代表病灶忠实度；同源自验证可能自洽幻觉 |
 | Fusion–Alignment | 动态 fusion/alignment 双层优化 | 弱模态激活与模态失衡 | 否 | 将对齐强度变成条件控制量 | 非医学 benchmark；对齐可能传播强模态捷径并删除 private 信息 |
+| Φ-OMNI | SIB + ΦID（PID 启发代理） | 抑制冗余、蒸馏协同交互 | 是 | 首个直接病理协同信息路线之一 | 代理受 PID 定义/变分估计影响，需合成真值与泄漏审计 |
+| SYNPRED | task-conditioned KL + VAE latent factorization | 经验协同与缺失测试 | 是 | 区分经验增益和正式 synergy 的对照 | 作者明确非正式信息论 synergy；moment matching 非完整密度 |
+| ShapKO | coalition utility / Shapley value | 动态模态 dominance | 是 | 将平均边际贡献接入训练分布 | Shapley utility 不是 MI、因果贡献或个体检查价值 |
 
 ## 最适合作为实验基线的组合
 
 - 任意缺失、非生成：SimMLM、MoRA、DRIM、BrainAnytime、EMMS。
-- 不均衡缺失率：PASSION、UniMIX-AD。
+- 不均衡缺失率与动态 dropout：PASSION、UniMIX-AD、ShapKO。
 - 生成式补全：MUST、MADAT、M³FeCon、UniBrain、PS-MIT。
 - 病理–组学生存：PG-MLIF、DRIM、M²Surv、MUST。
 - 非配对/不完整配对：UNest、MulModSeg、MUSK、IPIC、OT-Coupled Flow、MUST-VS。
-- 类别长尾：RadDiag、CXR-LT、CLIMD。
+- 类别长尾：RadDiag、CXR-LT、CLIMD、AMAF-Net。
 - 自然缺失临床基线：Missing-aware NSCLC survival、CMCM。
 - 不均衡缺失与梯度平衡：PASSION、BALM、ANGA。
 - 样本级信息诊断：LSMI；协同训练压力测试：InfMasking。
 - 顺序融合与缺失 MRI：SMSN；弱组合蒸馏：AdaMM。
 - 生成式基础模型审计：AFM2；融合—对齐控制：Fusion–Alignment。
 - 联邦系统性缺失：ProMoE-FL；类别条件缺失诊断：CSD。
+- 缺失组合校准：MMA-LTS；主动检查获取：SAGEAgent。
+- 协同信息：Φ-OMNI（PID 代理）、SYNPRED（经验 synergy）；检索证据：RMoE。

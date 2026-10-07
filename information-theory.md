@@ -11,7 +11,7 @@
 
 | 方向 | 信息论视角 | 最值得测量的量 | 直接启发 |
 |---|---|---|---|
-| 模态融合 | 融合应保留独有与协同信息，而非只扩大冗余 | PID、条件互信息 | InfoBridge、PID framework、I²M²、SMSN |
+| 模态融合 | 融合应保留独有与协同信息，而非只扩大冗余 | PID、条件互信息 | InfoBridge、PID framework、Φ-OMNI、SYNPRED |
 | 模态缺失 | 缺失模态中只有冗余部分原则上可从现有模态恢复 | \(I(X_m;Y\mid X_{obs})\)、预测熵 | DeepIMV、OMIB、HEALNet |
 | 长尾/模态竞争 | 头部或强模态可能压制弱模态的梯度和任务信息 | 各模态任务 MI、条件 MI 下界 | OMIB、MCR |
 | 非配对学习 | 没有样本级联合分布时，普通 MI 目标未必可识别 | 分布级依赖、少量锚点下的 CMI | Identifiable SCA、PID framework |
@@ -35,6 +35,7 @@
 8. [InfMasking](readings/40-infmasking.md)：把“增强 synergy”的算法主张与可测 PID 证据分开审计。
 9. [SMSN](readings/41-smsn.md) 与 [Fusion–Alignment](readings/44-fusion-alignment.md)：比较顺序压缩和动态对齐；重点检查它们是否保留任务相关 private 信息。
 10. [EMMS](readings/45-emms.md)、[BrainAnytime](readings/46-brainanytime.md) 与 [PS-MIT](readings/51-ps-mit.md)：把空证据、任意模态预训练和条件后验放在同一风险—覆盖坐标系中比较。
+11. [Φ-OMNI](readings/56-phi-omni.md) 与 [SYNPRED](readings/58-synpred.md)：直接比较 PID 启发代理和经验 synergy；再用 [ShapKO](readings/53-shapko.md) 检查任务效用是否与信息量混淆。
 
 ## 可执行的研究假设
 
@@ -72,6 +73,16 @@ SMSN 表明顺序融合可作为并行融合的替代，但随机重排没有把
 ### H. 空证据是缺失模态的零假设
 
 令 \(X_R\) 为已观测模态、\(X_m\) 为缺失模态、\(R\) 为检查获取模式。EMMS 的 vacuous evidence 给出“模型对缺失内容不作猜测”的零假设；PS-MIT/CMCM 的后验样本只能代表 \(p(X_m\mid X_R,R)\) 的模型近似，而不是患者真值。任何补全分支都应在相同 coverage 下显著优于仅观测空证据，并在完整病例回填中满足覆盖校准；若生成证据不能降低选择性风险，就关闭该分支。BrainAnytime 式共享预训练可以改善 \(X_R\) 的表征，但不自动降低不可约条件独有信息 \(I(X_m;Y\mid X_R,R)\)。
+
+### I. Synergy 必须预测真实联合干预收益
+
+令影像、组学和任务分别为 \(X_I,X_G,Y\)。Φ-OMNI 优化 SIB/ΦID 代理，SYNPRED 则把多模态预训练后的单模态增益称为经验 synergy；两者都不能仅凭 loss 下降证明 PID synergy。可操作的检验是：在控制样本量和编码器容量后，所估计的协同分数是否预测
+\(\Delta_{IG}=L(f_I)+L(f_G)-L(f_{IG})-L(f_\varnothing)\)
+及“加入真实组学”的个体/亚组风险下降。必须在已知 PID 真值的合成数据、更换估计器/变分族、报告清洗和外部癌种上复现；若只预测同中心准确率而不预测干预收益，主张应降级为多模态正则化。
+
+### J. Shapley utility 不是互信息
+
+ShapKO 的 \(\phi_m\) 是给定模型、验证集和任务指标下，模态 \(m\) 跨 coalition 的平均边际效用；它可以包含冗余和互补效应，却不等于 \(I(X_m;Y\mid X_{-m})\)，更不是病例级检查价值。研究中应同时报告 utility-Shapley、条件信息代理和真实新增检查的风险变化：三者排序一致才可支持“信息价值”解释；不一致时，Shapley 只能用于优化 dropout 分布。
 
 ## 实验注意事项
 

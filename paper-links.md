@@ -1,6 +1,6 @@
 # 已核验的论文原文与代码链接
 
-核验日期：**2026-09-28**。优先提供正式 proceedings、出版社、PMLR、PubMed、OpenReview 或 arXiv 的论文落地页；落地页通常比直接 PDF 更稳定。GitHub 首页中的论文名称首先链接到本仓库 reading，原文入口集中列在这里。
+核验日期：**2026-10-08**。优先提供正式 proceedings、出版社、PMLR、PubMed、OpenReview 或 arXiv 的论文落地页；落地页通常比直接 PDF 更稳定。GitHub 首页中的论文名称首先链接到本仓库 reading，原文入口集中列在这里。
 
 ## 医学多模态论文
 
@@ -37,6 +37,13 @@
 | 50 | OT-Coupled Flow | [MICCAI 2026](https://papers.miccai.org/miccai-2026/0750-Paper0555.html) | [Code](https://github.com/yunhaoli24/OTC-Flow) |
 | 51 | PS-MIT | [ECCV 2026 Accepted Papers](https://eccv.ecva.net/Conferences/2026/AcceptedPapers) | [arXiv](https://arxiv.org/abs/2607.18763) · [Code](https://github.com/jongdory/PS-MIT) |
 | 52 | MUST-VS | [IEEE TMI](https://doi.org/10.1109/TMI.2026.3709810) | [PubMed](https://pubmed.ncbi.nlm.nih.gov/42397993/) · [Code](https://github.com/JiaxinZhuang/MUST) |
+| 53 | ShapKO | [MICCAI 2026](https://papers.miccai.org/miccai-2026/0956-Paper3767.html) | [Code](https://github.com/sumona00/ShapKO) |
+| 54 | MMA-LTS | [MICCAI 2026](https://papers.miccai.org/miccai-2026/0659-Paper1236.html) | Code not verified |
+| 55 | SAGEAgent | [MICCAI 2026](https://papers.miccai.org/miccai-2026/0915-Paper0802.html) | [Code](https://github.com/Chongyu1117/SAGEAgent) |
+| 56 | Φ-OMNI | [MICCAI 2026](https://papers.miccai.org/miccai-2026/1025-Paper0048.html) | [Code](https://github.com/imicjs/PhiOmni) |
+| 57 | RMoE | [MICCAI 2026](https://papers.miccai.org/miccai-2026/0893-Paper2015.html) | Code not verified |
+| 58 | SYNPRED | [MICCAI 2026](https://papers.miccai.org/miccai-2026/1029-Paper2011.html) | [Code](https://github.com/cirmuw/SYNPRED) |
+| 59 | AMAF-Net | [MICCAI 2026](https://papers.miccai.org/miccai-2026/0660-Paper1243.html) | [Code](https://github.com/fj-sunny/AMAF-Net) |
 
 ## 可迁移方法与信息论
 
