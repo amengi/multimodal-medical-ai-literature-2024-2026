@@ -6,7 +6,7 @@
 
 ## 检索策略
 
-- 时间：滚动 24 个月；本轮为 2024-10-08—2026-10-08。
+- 时间：滚动 24 个月；本轮为 2024-10-12—2026-10-12。
 - 医学来源：Nature、Nature Medicine、Nature Communications、Medical Image Analysis、npj Digital Medicine、MICCAI、MIDL。
 - 通用 AI 来源：CVPR、ICCV、NeurIPS、ACM MM、WACV。
 - 关键词族：`missing modality`、`incomplete multimodal`、`modality dropout`、`modality imputation`、`long-tailed multimodal`、`modality combination imbalance`、`unpaired multimodal`、`shared private representation`、`multimodal medical fusion`。
@@ -25,7 +25,7 @@
 
 这些是定向简读，不等同于逐公式复现。对于未公开数据、未报告统计显著性或只在模拟缺失上验证的工作，笔记会明确指出证据边界。
 
-链接于 2026-10-08 重新核验。优先使用正式落地页而非直接 PDF；集中入口见 [paper-links.md](paper-links.md)。部分出版社或 OpenReview 页面可能有地区、Cookie 或浏览器验证限制，因此保留 PubMed、PMC、项目页或代码作为备用入口。
+链接于 2026-10-12 重新核验。优先使用正式落地页而非直接 PDF；集中入口见 [paper-links.md](paper-links.md)。部分出版社或 OpenReview 页面可能有地区、Cookie 或浏览器验证限制，因此保留 PubMed、PMC、项目页或代码作为备用入口。
 
 ## 三种“长尾”
 
@@ -65,3 +65,11 @@
 - **筛选**：标题/摘要候选 27 篇；排除已收录、普通融合、仅 workshop/预印本、缺少可核验方法边界或与主题重复度高者后，纳入 7 篇。
 - **本轮新增**：ShapKO、MMA-LTS、SAGEAgent、Φ-OMNI、RMoE、SYNPRED、AMAF-Net。
 - **证据处理**：明确 Shapley utility 不等于 MI；区分正式 PID 代理与经验 synergy；检索结果视作外部证据而非患者真实模态；主动获取结果要求 non-inferiority、成本敏感性和外部策略迁移验证。
+
+## 2026-10-12 周检索记录
+
+- **检索式族**：精确任务（missing modality multimodal medical）、同义扩展（incomplete/dropout/imputation）、非配对（unpaired/label-paired/disjoint cohorts）、方法导向（information bottleneck/conditional MI/PID/uncertainty）、venue 导向（IJCAI/MICCAI 2026、Nature Portfolio、NeurIPS/OpenReview）。
+- **权威来源**：IJCAI Proceedings/PDF、MICCAI Open Access、Springer Nature/npj 正式文章页与 DOI、作者代码仓库；同时检索 CVF、PMLR、OpenReview、PubMed/PMC，未以二手摘要替代论文核验。
+- **筛选**：标题/摘要候选 22 篇；排除仓库已有、仅预印本、普通融合、venue/元数据不足或不能直接启发目标问题者后，纳入 5 篇。
+- **本轮新增**：QA-MoE、GMENet、CALM、非配对病理–MRI 胶质瘤分型、Angiography-free retina。
+- **证据处理**：区分真实结构性缺失与完整病例模拟遮挡、label-pairing 与患者级配对、特征检索与患者真实模态；CALM 的 DOI/页码在官方 MICCAI 页面仍为 pending，明确标为未核验。QA-MoE/GMENet 以 IJCAI 正式年份与 DOI 为准，两篇 npj 工作以 2026 version of record 为准。

@@ -391,6 +391,33 @@
 
 **外部验证与反证。** 在真实 MNAR 队列报告 disease × modality-combination × site 的 C-index/AUPRC、ECE/Brier、risk–coverage、邻居纯度与隐私攻击；外部库单独评估。若 gate 不能区分有害邻居，或收益只存在于同站点头部亚组，则检索分支应关闭并退回空证据。
 
+## 2026-10-12：两条新增、可证伪的研究连接
+
+### Idea 11：可靠性不等于信息价值——三状态质量路由
+
+**科学问题。** QA-MoE 以 evidential uncertainty 筛掉低质量模态，GMENet 对缺失序列生成特征，EMMS 对缺失给空证据，ShapKO 则估计跨组合平均任务效用。四者分别处理“噪声、缺失、不作猜测、平均贡献”，但没有回答一个关键问题：一个高质量模态可能对当前患者没有新增信息，而一个不确定模态可能包含高价值、独有的病灶证据。
+
+**假设与随机变量。** 令已观测数据、候选模态、缺失模式、站点与结局为 \(X_R,X_m,R,S,Y\)。将状态显式分成 absent、present-but-corrupted、present-and-informative；真正目标是预测真实新增模态带来的条件风险下降
+\(\Delta_m=\ell(f(X_R),Y)-\ell(f(X_R,X_m),Y)\)，而不是把 evidential score 当成 \(I(X_m;Y\mid X_R,R,S)\)。质量 \(Q_m\) 只描述观测可信度，信息价值 \(V_m\) 描述对任务的边际收益；两者可相关但不可互换。
+
+**最小可行模型与必要损失。** 采用 QA-MoE 的 quality scorer、EMMS 的 vacuous evidence 和一个小型 value head。完整病例上做真实模态 hide/reveal 干预监督 \(\hat\Delta_m\)，自然缺失病例用 propensity 区间而非伪标签；gate 只在 observed-only、使用真实模态、使用带后验的恢复证据、abstain/acquire 四个动作中选择。损失限定为任务损失、value ranking、class × combination calibration 与选择性风险；不把 EDL、Shapley 或 InfoNCE 写成 MI 估计。
+
+**训练/推理与关键基线。** 训练按患者划分，禁止同一患者切片/访问跨 split；先在 complete subset 预训练 value head，再冻结后迁移到真实缺失。推理时仅使用可见模态、质量与合法成本。比较 late fusion、EMMS、QA-MoE、ShapKO、GMENet、oracle \(\Delta_m\)；消融质量、价值、missing mask、生成后验、拒绝与 propensity。报告 AUROC/AUPRC、ECE/Brier、risk–coverage、平均检查成本，以及 disease × modality-combination × site 的 worst-group risk。
+
+**外部验证与可证伪条件。** 第二中心同时改变扫描仪和检查倾向；分别报告 MCAR 模拟、MAR 分层和 MNAR 敏感性边界。若 \(Q_m\) 与 \(\Delta_m\) 在控制类别/站点后无稳定关系，这是预期分离而非失败；但若 value head 不能优于只用质量/频率预测真实 hide/reveal 收益，或 gate 的收益来自 missing mask 标签捷径，则“三状态信息价值路由”主张失败。
+
+### Idea 12：配对图分辨率决定可识别的跨模态主张
+
+**科学问题。** CALM 从完全不重叠的影像/遗传队列学习类条件 association，胶质瘤工作以同标签随机配对或交替单模态训练获得融合增益，IPIC 依赖组标签，Identifiable SCA 则给出共享成分的理论边界。它们暗示“无患者配对”并非单一设定：标签、站点、时间窗和少量锚点共同决定 pairing graph 的分辨率，也决定可以声称分布级关联、亚型级共享，还是患者级交互。
+
+**假设与最小模型。** 令 pairing graph 节点为样本、边为同患者/同亚型/同站点/同时间窗，边置信度为 \(w_e\)。共享表示只在图的连通分量与控制变量 \((Y,S)\) 内对齐；private branch 吸收站点与祖源 nuisance。模型包含单模态冻结编码器、CALM 式 class-conditional MMD、少量真配对的 anchor loss 与可选 low-rank interaction head。零锚点时只输出分布级 association；锚点增加后才测试患者级 interaction。
+
+**必要损失与信息论边界。** 使用任务损失、带站点条件的 MMD、anchor consistency 和 nuisance adversary；正交只防退化，不作为 independence/PID 证据。若要估计 \(I(X_I;X_G\mid Y,S)\)，必须声明变分界/估计器、负样本构造、batch bias 和 bootstrap 区间；主要结论仍由锚点洗牌和真实联合干预支持，而非 MI 数值本身。
+
+**关键实验。** 配对比例取 0、0.1%、1%、5%、10% 与全配对；比较 CALM、IPIC、label-pairing、naive ensemble、Identifiable SCA 与 paired oracle。做患者错配、标签置换、站点匹配、祖源平衡、锚点洗牌和“保留标签但打乱患者”负对照；在合成数据中恢复已知共享因子，在医学数据中报告外部 paired 队列、校准和稀有亚型。患者级划分必须覆盖切片、扫描和重复访问。
+
+**可证伪条件。** 若 association 主要随站点/祖源而非锚点增长稳定，或错配患者后联合性能与 biomarker matrix 基本不变，则模型只学到类条件边缘结构；论文必须降级为分布级迁移。只有患者级锚点增长带来可重复的 interaction 增益，并通过外部 paired 队列与负对照，才能声称患者级跨模态生物学。
+
 ## 五条路线如何取舍
 
 | 路线 | 新颖性潜力 | 数据门槛 | 理论风险 | 临床价值 | 推荐起点 |

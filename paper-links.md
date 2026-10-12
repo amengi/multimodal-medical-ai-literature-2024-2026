@@ -1,6 +1,6 @@
 # 已核验的论文原文与代码链接
 
-核验日期：**2026-10-08**。优先提供正式 proceedings、出版社、PMLR、PubMed、OpenReview 或 arXiv 的论文落地页；落地页通常比直接 PDF 更稳定。GitHub 首页中的论文名称首先链接到本仓库 reading，原文入口集中列在这里。
+核验日期：**2026-10-12**。优先提供正式 proceedings、出版社、PMLR、PubMed、OpenReview 或 arXiv 的论文落地页；落地页通常比直接 PDF 更稳定。GitHub 首页中的论文名称首先链接到本仓库 reading，原文入口集中列在这里。
 
 ## 医学多模态论文
 
@@ -44,6 +44,11 @@
 | 57 | RMoE | [MICCAI 2026](https://papers.miccai.org/miccai-2026/0893-Paper2015.html) | Code not verified |
 | 58 | SYNPRED | [MICCAI 2026](https://papers.miccai.org/miccai-2026/1029-Paper2011.html) | [Code](https://github.com/cirmuw/SYNPRED) |
 | 59 | AMAF-Net | [MICCAI 2026](https://papers.miccai.org/miccai-2026/0660-Paper1243.html) | [Code](https://github.com/fj-sunny/AMAF-Net) |
+| 60 | QA-MoE | [IJCAI 2026](https://www.ijcai.org/proceedings/2026/766) | [DOI](https://doi.org/10.24963/ijcai.2026/766) · [Code](https://github.com/Illidon/QA-MoE) |
+| 61 | GMENet | [IJCAI 2026](https://www.ijcai.org/proceedings/2026/765) | [DOI](https://doi.org/10.24963/ijcai.2026/765) · [Code](https://github.com/spf-sd/GMENet) |
+| 62 | CALM | [MICCAI 2026](https://papers.miccai.org/miccai-2026/0144-Paper2961.html) | DOI/page pending · [Code](https://github.com/jueqiw/CALM) |
+| 63 | Glioma unpaired fusion | [npj Precision Oncology](https://www.nature.com/articles/s41698-026-01366-5) | [DOI](https://doi.org/10.1038/s41698-026-01366-5) · [Code](https://github.com/csaueres/radio-path-glioma-subtyping) |
+| 64 | Angiography-free retina | [npj Digital Medicine](https://www.nature.com/articles/s41746-026-02641-2) | [DOI](https://doi.org/10.1038/s41746-026-02641-2) · [Code](https://github.com/iMED-Lab/IMIG) |
 
 ## 可迁移方法与信息论
 

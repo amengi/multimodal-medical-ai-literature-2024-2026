@@ -42,6 +42,11 @@
 | RMoE | WSI + genomics | 训练/测试不完整 | 双向患者检索 + reliability-aware MoE | 缺失组合 | 检索式 | 生存 | 三个 TCGA、固定 60% 缺失；risk-label 检索捷径、MNAR 与外部库未验证 |
 | SYNPRED | DCE-MRI + RNA | 配对训练、测试可缺失 | shared/unimodal/instance latent VAE | 模态可用率 | latent 生成 | 治疗反应 | synergy 为经验增益非正式 PID；单任务、小样本与 RNA 主导限制外推 |
 | AMAF-Net | 非增强 CT + 临床变量 | 真实变量级不完整 | missing pattern 条件融合 + prototype regularization | 类别 × missing pattern | 否 | 四类肾上腺肿瘤 | 1,108 名单中心；mask 可能编码流程/标签，外部与时间验证不足 |
+| QA-MoE | ADNI 五模态；MIMIC-IV 三类 EHR | 真实结构性不完整 | evidential quality + subset selection + ternary MoE | 类别 × 模态可用率 | 模板级 | AD 分期/住院时长 | 两个公开 benchmark、无外部站点；质量代理、mask 捷径与患者划分需审计 |
+| GMENet | T1c + FLAIR MRI | 多中心真实不完整 + 完整病例随机遮挡 | cross-attention 特征生成 + confidence MoE | 中心 × 序列 × 类别 | 特征级 | 胶质瘤多任务诊断 | 1,241 例六中心；cycle consistency 不证明病灶真实，需留中心外测与 MNAR 分层 |
+| CALM | 脑区形态 + 遗传通路 | 完全不重叠人群 | 类条件 MMD + supervised contrastive + 线性投影 | 未专门建模 | 否 | ASD 分类/生物标志物 | 外部 paired 队列；标签/站点/祖源混杂与不可识别性仍在，正交非信息分解 |
+| Glioma unpaired fusion | WSI + 多参数 MRI | label-paired 或完全交替训练 | frozen FM + early/late/MoE fusion | 亚型 × 模态 | 否 | WHO 2021 胶质瘤分型 | 1,731 单模态训练、171 配对测试；类条件共享不等于患者交互，需泄漏审计 |
+| Angiography-free retina | CFP + FFA | 训练精确配对、推理固定缺 FFA | 疾病特征库检索与 latent completion | 疾病 × 设备 | 特征级 | 七类视网膜病诊断 | 多源外测但固定缺失；图像/患者计数、双眼泄漏、逐源校准与罕见病幻觉需核查 |
 
 ## 信息论及理论论文
 
@@ -73,7 +78,7 @@
 - 不均衡缺失率与动态 dropout：PASSION、UniMIX-AD、ShapKO。
 - 生成式补全：MUST、MADAT、M³FeCon、UniBrain、PS-MIT。
 - 病理–组学生存：PG-MLIF、DRIM、M²Surv、MUST。
-- 非配对/不完整配对：UNest、MulModSeg、MUSK、IPIC、OT-Coupled Flow、MUST-VS。
+- 非配对/不完整配对：UNest、MUSK、IPIC、CALM、Glioma unpaired fusion、OT-Coupled Flow、MUST-VS。
 - 类别长尾：RadDiag、CXR-LT、CLIMD、AMAF-Net。
 - 自然缺失临床基线：Missing-aware NSCLC survival、CMCM。
 - 不均衡缺失与梯度平衡：PASSION、BALM、ANGA。
@@ -83,3 +88,4 @@
 - 联邦系统性缺失：ProMoE-FL；类别条件缺失诊断：CSD。
 - 缺失组合校准：MMA-LTS；主动检查获取：SAGEAgent。
 - 协同信息：Φ-OMNI（PID 代理）、SYNPRED（经验 synergy）；检索证据：RMoE。
+- 质量感知真实缺失：QA-MoE；多中心生成式缺失 MRI：GMENet；单模态部署：Angiography-free retina。

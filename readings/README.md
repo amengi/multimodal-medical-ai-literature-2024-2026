@@ -7,8 +7,8 @@
 | 研究路线 | 核心论文组合 | 每篇论文承担的角色 |
 |---|---|---|
 | A. MNAR × 三重长尾 × 信息覆盖路由 | UniMIX-AD + BALM + ShapKO + AMAF-Net + MMA-LTS | 组合长尾、效用驱动 knockout、真实变量缺失、组合条件校准 |
-| B. 可拒绝的非幻觉补全 | MUST + EMMS + UniBrain + PS-MIT + CMCM + AFM2 + NSCLC missing-aware | shared/private、空证据基线、后验生成、生成审计、现实缺失 |
-| C. 锚点图驱动的非配对学习 | MUSK + IPIC + Identifiable SCA + OT-Coupled Flow + MUST-VS | 无配对预训练、组标签、OT 伪配对、不完整配对、可识别边界 |
+| B. 可拒绝的非幻觉补全 | MUST + EMMS + PS-MIT + GMENet + Angiography-free + AFM2 | 空证据、后验生成、生成/检索审计、现实缺失 |
+| C. 锚点图驱动的非配对学习 | MUSK + IPIC + CALM + Glioma unpaired fusion + Identifiable SCA | 无配对预训练、类条件对齐、标签配对、锚点与可识别边界 |
 | D. PID 引导自适应融合 | PID + LSMI + InfoBridge + Φ-OMNI + SYNPRED + InfMasking | 正式/经验 synergy、群体/样本诊断、独有信息保护、估计器审计 |
 | E. 长尾医学 VLM | EyeCLIP + RadDiag + CXR-LT + MUSK + TITAN + Neglected Tails | 眼科与放射长尾、基础模型、尾部机制、模态依赖审计 |
 | F. 联邦 MNAR 与站点长尾 | ProMoE-FL + EMMS + BALM + Missing-aware NSCLC | 客户端原型、证据回退、梯度平衡、真实检查倾向 |
@@ -54,6 +54,11 @@
 36. [RMoE](57-rmoe.md) — 患者检索与可靠性专家的缺失生存预测
 37. [SYNPRED](58-synpred.md) — 经验协同多模态 VAE 与缺失测试
 38. [AMAF-Net](59-amaf-net.md) — 真实临床变量缺失与类别长尾
+39. [QA-MoE](60-qa-moe.md) — 质量估计与缺失/噪声路由解耦
+40. [GMENet](61-gmenet.md) — 多中心不完整 MRI 的生成式 MoE
+41. [CALM](62-calm.md) — 完全非配对影像–遗传对齐
+42. [Glioma unpaired fusion](63-unpaired-glioma-fusion.md) — 标签配对/非配对病理–MRI 融合
+43. [Angiography-free retina](64-angiography-free-retina.md) — 训练期 CFP–FFA、部署期 CFP 检索补全
 
 ## 可迁移的非医学论文
 

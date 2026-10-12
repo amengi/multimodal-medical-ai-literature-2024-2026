@@ -8,7 +8,7 @@
 - 非配对或弱配对学习（unpaired/weakly paired learning）
 - 信息瓶颈、条件互信息与信息分解（information theory）
 
-当前滚动检索窗口为 **2024-10-08 至 2026-10-08**。正式发表于 MICCAI、CVPR、ECCV、ICML、ICLR、NeurIPS 等会议的论文按 proceedings/会议时间纳入。另收录少量略早但具有直接方法启发的论文，并单独标明。
+当前滚动检索窗口为 **2024-10-12 至 2026-10-12**。正式发表于 MICCAI、CVPR、ECCV、ICML、ICLR、NeurIPS 等会议的论文按 proceedings/会议时间纳入。另收录少量略早但具有直接方法启发的论文，并单独标明。
 
 ## 快速入口
 
@@ -22,10 +22,10 @@
 
 ## 优先阅读路线
 
-1. **真实缺失与不平衡**：PASSION → UniMIX-AD → ShapKO → AMAF-Net → MMA-LTS
+1. **真实缺失与不平衡**：PASSION → UniMIX-AD → QA-MoE → GMENet → MMA-LTS
 2. **共享/私有表示与生成补全**：DRIM → MUST → MADAT → AFM2 → UniBrain → PS-MIT
 3. **类别与组合长尾**：RadDiag → CXR-LT → CLIMD → AMAF-Net → ShapKO
-4. **非配对/不完整配对学习**：UNest → MUSK → UNIALIGN → Identifiable SCA → OT-Coupled Flow → MUST-VS
+4. **非配对/不完整配对学习**：MUSK → IPIC → CALM → 非配对病理–MRI 融合 → Identifiable SCA
 5. **信息论与融合机制**：PID framework → OMIB → InfoBridge → LSMI → Φ-OMNI → SYNPRED
 6. **主动检查获取与可靠性**：SAGEAgent → MMA-LTS → EMMS → ShapKO
 
@@ -78,9 +78,14 @@
 | 患者检索式缺失证据 | [RMoE](readings/57-rmoe.md) |
 | 经验协同多模态 VAE | [SYNPRED](readings/58-synpred.md) |
 | 真实缺失 × 类别长尾 | [AMAF-Net](readings/59-amaf-net.md) |
+| 质量感知缺失路由 | [QA-MoE](readings/60-qa-moe.md) |
+| 多中心 MRI 生成式补全 | [GMENet](readings/61-gmenet.md) |
+| 完全非配对影像–遗传对齐 | [CALM](readings/62-calm.md) |
+| 非配对病理–MRI 融合 | [Glioma unpaired fusion](readings/63-unpaired-glioma-fusion.md) |
+| 训练期 FFA、部署期 CFP | [Angiography-free retina](readings/64-angiography-free-retina.md) |
 
 ## 使用说明
 
-目前共收录 **59 篇** reading。单篇笔记刻意保持简短，只保留论文事实、关键边界和一条可迁移启发；跨论文的组合方式、创新假设、模型原型、关键实验与失败判据集中在 [innovation-roadmap.md](innovation-roadmap.md)。未在论文主页或正文中核验的代码会标记为“未核验”。原文链接以出版社、正式 proceedings、PMLR、OpenReview、PubMed 或 arXiv 落地页为主，并在 [paper-links.md](paper-links.md) 集中维护。
+目前共收录 **64 篇** reading。单篇笔记刻意保持简短，只保留论文事实、关键边界和一条可迁移启发；跨论文的组合方式、创新假设、模型原型、关键实验与失败判据集中在 [innovation-roadmap.md](innovation-roadmap.md)。未在论文主页或正文中核验的代码会标记为“未核验”。原文链接以出版社、正式 proceedings、PMLR、OpenReview、PubMed 或 arXiv 落地页为主，并在 [paper-links.md](paper-links.md) 集中维护。
 
 本仓库仅保存阅读笔记和公开链接，不重新分发受版权保护的论文全文。论文内容和图表版权归原作者及出版方所有。
