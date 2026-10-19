@@ -47,6 +47,10 @@
 | CALM | 脑区形态 + 遗传通路 | 完全不重叠人群 | 类条件 MMD + supervised contrastive + 线性投影 | 未专门建模 | 否 | ASD 分类/生物标志物 | 外部 paired 队列；标签/站点/祖源混杂与不可识别性仍在，正交非信息分解 |
 | Glioma unpaired fusion | WSI + 多参数 MRI | label-paired 或完全交替训练 | frozen FM + early/late/MoE fusion | 亚型 × 模态 | 否 | WHO 2021 胶质瘤分型 | 1,731 单模态训练、171 配对测试；类条件共享不等于患者交互，需泄漏审计 |
 | Angiography-free retina | CFP + FFA | 训练精确配对、推理固定缺 FFA | 疾病特征库检索与 latent completion | 疾病 × 设备 | 特征级 | 七类视网膜病诊断 | 多源外测但固定缺失；图像/患者计数、双眼泄漏、逐源校准与罕见病幻觉需核查 |
+| Uni-IMD | 胸片 + 报告；私有多模态临床数据 | 完整与不完整病例混合 | common/specific 分解 + OT + 重建 | 未专门建模 | 表示级 | 医学诊断 | Indiana/私有数据；患者划分、自然或模拟缺失与 MI 估计器偏差需复核，online 2026/volume 2027 |
+| RAM-Missing | WSI + RNA + CT | 真实患者级不完整，75.4% 缺 CT | 折内 top-k CT 检索 + entropy 条件 MoE | 类别 × 模态组合 | 检索式 | LUAD/LUSC 分型 | TCGA 单队列；折内 memory bank 防直接泄漏，但绝对增益有限、entropy 未校准、无外部三模态验证 |
+| PriOrGen | WSI + 病理报告 | 患者级配对 | 视觉 prototype bottleneck + meta-report prior | 器官 × 疾病概念 × 文本模板 | 文本生成 | 病理报告 | 4,686 对、11 个 TCGA 癌种；自动词面指标为主，无外部病理事实性/幻觉验证，IB 是结构代理 |
+| IB-GPID | RNA/甲基化/miRNA/CNV 两两组合 | 患者级配对 | IB 特征选择后 Gaussian PID | 癌种/模态对可不均衡 | 否 | 生存预测/解释 | 17 个 TCGA 队列与 104 例外部队列；Gaussian/PID 定义、靶标变换、协方差小样本和选择泄漏敏感 |
 
 ## 信息论及理论论文
 
@@ -71,6 +75,9 @@
 | Φ-OMNI | SIB + ΦID（PID 启发代理） | 抑制冗余、蒸馏协同交互 | 是 | 首个直接病理协同信息路线之一 | 代理受 PID 定义/变分估计影响，需合成真值与泄漏审计 |
 | SYNPRED | task-conditioned KL + VAE latent factorization | 经验协同与缺失测试 | 是 | 区分经验增益和正式 synergy 的对照 | 作者明确非正式信息论 synergy；moment matching 非完整密度 |
 | ShapKO | coalition utility / Shapley value | 动态模态 dominance | 是 | 将平均边际贡献接入训练分布 | Shapley utility 不是 MI、因果贡献或个体检查价值 |
+| Uni-IMD | common/specific MI 最小化代理 + OT | 完整/不完整统一诊断 | 是 | 把表示分解与缺失重建放入同一架构 | 尚未核验 MI 估计器；低代理值不证明可识别独立性 |
+| PriOrGen | prototype-anchored bottleneck | 长尾报告生成去偏 | 是 | 检查压缩是否保护尾部视觉证据 | 未核验显式 MI 量；原型压缩不等于正式 IB 保证 |
+| IB-GPID | bias-corrected Gaussian PID | 生存任务的 redundancy/unique/synergy | 是 | 直接连接信息分解、模态选择与缺失可恢复性 | 依赖 Gaussianized target、PID 定义与协方差估计，仍需 hide/reveal 干预校验 |
 
 ## 最适合作为实验基线的组合
 
@@ -89,3 +96,5 @@
 - 缺失组合校准：MMA-LTS；主动检查获取：SAGEAgent。
 - 协同信息：Φ-OMNI（PID 代理）、SYNPRED（经验 synergy）；检索证据：RMoE。
 - 质量感知真实缺失：QA-MoE；多中心生成式缺失 MRI：GMENet；单模态部署：Angiography-free retina。
+- 真实缺失检索：RAM-Missing、RMoE；统一分解：Uni-IMD、DRIM。
+- 多模态长尾报告：PriOrGen、EyeCLIP、RadDiag；Gaussian PID 诊断：IB-GPID。

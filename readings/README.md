@@ -59,6 +59,10 @@
 41. [CALM](62-calm.md) — 完全非配对影像–遗传对齐
 42. [Glioma unpaired fusion](63-unpaired-glioma-fusion.md) — 标签配对/非配对病理–MRI 融合
 43. [Angiography-free retina](64-angiography-free-retina.md) — 训练期 CFP–FFA、部署期 CFP 检索补全
+44. [Uni-IMD](65-uni-imd.md) — 统一共享/特异分解、OT 与缺失重建
+45. [RAM-Missing](66-ram-missing.md) — 真实缺失 CT 的折内检索增强
+46. [PriOrGen](67-priorgen.md) — 多器官长尾病理报告生成
+47. [IB-GPID](68-ib-gpid.md) — 多组学生存的 Gaussian PID 解释
 
 ## 可迁移的非医学论文
 

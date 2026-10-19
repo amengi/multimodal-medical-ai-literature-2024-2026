@@ -6,7 +6,7 @@
 
 ## 检索策略
 
-- 时间：滚动 24 个月；本轮为 2024-10-12—2026-10-12。
+- 时间：滚动 24 个月；本轮为 2024-10-19—2026-10-19。
 - 医学来源：Nature、Nature Medicine、Nature Communications、Medical Image Analysis、npj Digital Medicine、MICCAI、MIDL。
 - 通用 AI 来源：CVPR、ICCV、NeurIPS、ACM MM、WACV。
 - 关键词族：`missing modality`、`incomplete multimodal`、`modality dropout`、`modality imputation`、`long-tailed multimodal`、`modality combination imbalance`、`unpaired multimodal`、`shared private representation`、`multimodal medical fusion`。
@@ -25,7 +25,7 @@
 
 这些是定向简读，不等同于逐公式复现。对于未公开数据、未报告统计显著性或只在模拟缺失上验证的工作，笔记会明确指出证据边界。
 
-链接于 2026-10-12 重新核验。优先使用正式落地页而非直接 PDF；集中入口见 [paper-links.md](paper-links.md)。部分出版社或 OpenReview 页面可能有地区、Cookie 或浏览器验证限制，因此保留 PubMed、PMC、项目页或代码作为备用入口。
+链接于 2026-10-19 重新核验。优先使用正式落地页而非直接 PDF；集中入口见 [paper-links.md](paper-links.md)。部分出版社或 OpenReview 页面可能有地区、Cookie 或浏览器验证限制，因此保留 PubMed、PMC、项目页或代码作为备用入口。
 
 ## 三种“长尾”
 
@@ -73,3 +73,12 @@
 - **筛选**：标题/摘要候选 22 篇；排除仓库已有、仅预印本、普通融合、venue/元数据不足或不能直接启发目标问题者后，纳入 5 篇。
 - **本轮新增**：QA-MoE、GMENet、CALM、非配对病理–MRI 胶质瘤分型、Angiography-free retina。
 - **证据处理**：区分真实结构性缺失与完整病例模拟遮挡、label-pairing 与患者级配对、特征检索与患者真实模态；CALM 的 DOI/页码在官方 MICCAI 页面仍为 pending，明确标为未核验。QA-MoE/GMENet 以 IJCAI 正式年份与 DOI 为准，两篇 npj 工作以 2026 version of record 为准。
+
+## 2026-10-19 周检索记录
+
+- **检索式族**：精确任务（missing modality multimodal medical）、同义扩展（incomplete/missing-aware/retrieval/imputation）、非配对与长尾（unpaired/weakly paired/long-tailed pathology report）、信息论（information bottleneck/mutual information/Gaussian PID/redundancy/unique/synergy）、venue 与数据库导向（MICCAI/Pattern Recognition/CMPB/PubMed/OpenReview/CVF/PMLR）。
+- **权威来源**：MICCAI Open Access 与 Springer 卷目录、ScienceDirect/Elsevier、PubMed、CVF、PMLR、OpenReview及作者公开代码仓库；标题、作者、正式年份、页码、DOI和代码分别交叉核验，未用搜索摘要替代方法与证据核验。
+- **筛选**：标题/摘要候选 26 篇；按 DOI/近似标题去重，排除仓库已有、仅预印本、普通融合、低相关 venue 和无法核验关键边界的条目后，纳入 4 篇。
+- **本轮新增**：Uni-IMD（统一分解与 OT 缺失诊断）、RAM-Missing（真实缺失 CT 的检索增强）、PriOrGen（多器官长尾病理报告）、IB-GPID（生存任务 Gaussian PID）。
+- **年份与代码处理**：Uni-IMD 标记为 online/DOI year 2026、volume cover 2027；RAM-Missing/PriOrGen 按 MICCAI 2026 与 Springer 页码收录，章节 DOI 未生成；PriOrGen 仓库仅核验到 README，未将其写成已发布实现；IB-GPID 以 2026 version of record、PubMed、DOI 与代码仓库为准。
+- **证据处理**：RAM-Missing 的折内 memory bank 降低直接泄漏但 retrieval entropy 不等于校准不确定性；PriOrGen 的 prototype bottleneck 不等于正式 MI 界；IB-GPID 的 Gaussian atoms 依赖 PID 定义、靶标变换和协方差估计，必须以真实 hide/reveal 与外部队列检验。

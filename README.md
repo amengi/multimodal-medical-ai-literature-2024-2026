@@ -8,7 +8,7 @@
 - 非配对或弱配对学习（unpaired/weakly paired learning）
 - 信息瓶颈、条件互信息与信息分解（information theory）
 
-当前滚动检索窗口为 **2024-10-12 至 2026-10-12**。正式发表于 MICCAI、CVPR、ECCV、ICML、ICLR、NeurIPS 等会议的论文按 proceedings/会议时间纳入。另收录少量略早但具有直接方法启发的论文，并单独标明。
+当前滚动检索窗口为 **2024-10-19 至 2026-10-19**。正式发表于 MICCAI、CVPR、ECCV、ICML、ICLR、NeurIPS 等会议的论文按 proceedings/会议时间纳入。另收录少量略早但具有直接方法启发的论文，并单独标明。
 
 ## 快速入口
 
@@ -22,11 +22,11 @@
 
 ## 优先阅读路线
 
-1. **真实缺失与不平衡**：PASSION → UniMIX-AD → QA-MoE → GMENet → MMA-LTS
+1. **真实缺失与不平衡**：PASSION → UniMIX-AD → QA-MoE → RAM-Missing → MMA-LTS
 2. **共享/私有表示与生成补全**：DRIM → MUST → MADAT → AFM2 → UniBrain → PS-MIT
-3. **类别与组合长尾**：RadDiag → CXR-LT → CLIMD → AMAF-Net → ShapKO
+3. **类别与组合长尾**：RadDiag → CXR-LT → CLIMD → AMAF-Net → PriOrGen
 4. **非配对/不完整配对学习**：MUSK → IPIC → CALM → 非配对病理–MRI 融合 → Identifiable SCA
-5. **信息论与融合机制**：PID framework → OMIB → InfoBridge → LSMI → Φ-OMNI → SYNPRED
+5. **信息论与融合机制**：PID framework → OMIB → InfoBridge → LSMI → IB-GPID → Φ-OMNI
 6. **主动检查获取与可靠性**：SAGEAgent → MMA-LTS → EMMS → ShapKO
 
 ## 核心论文
@@ -83,9 +83,13 @@
 | 完全非配对影像–遗传对齐 | [CALM](readings/62-calm.md) |
 | 非配对病理–MRI 融合 | [Glioma unpaired fusion](readings/63-unpaired-glioma-fusion.md) |
 | 训练期 FFA、部署期 CFP | [Angiography-free retina](readings/64-angiography-free-retina.md) |
+| 统一共享/特异分解与 OT | [Uni-IMD](readings/65-uni-imd.md) |
+| 真实缺失 CT 的检索增强 | [RAM-Missing](readings/66-ram-missing.md) |
+| 多器官长尾病理报告生成 | [PriOrGen](readings/67-priorgen.md) |
+| Gaussian PID 与多组学生存 | [IB-GPID](readings/68-ib-gpid.md) |
 
 ## 使用说明
 
-目前共收录 **64 篇** reading。单篇笔记刻意保持简短，只保留论文事实、关键边界和一条可迁移启发；跨论文的组合方式、创新假设、模型原型、关键实验与失败判据集中在 [innovation-roadmap.md](innovation-roadmap.md)。未在论文主页或正文中核验的代码会标记为“未核验”。原文链接以出版社、正式 proceedings、PMLR、OpenReview、PubMed 或 arXiv 落地页为主，并在 [paper-links.md](paper-links.md) 集中维护。
+目前共收录 **68 篇** reading。单篇笔记刻意保持简短，只保留论文事实、关键边界和一条可迁移启发；跨论文的组合方式、创新假设、模型原型、关键实验与失败判据集中在 [innovation-roadmap.md](innovation-roadmap.md)。未在论文主页或正文中核验的代码会标记为“未核验”。原文链接以出版社、正式 proceedings、PMLR、OpenReview、PubMed 或 arXiv 落地页为主，并在 [paper-links.md](paper-links.md) 集中维护。
 
 本仓库仅保存阅读笔记和公开链接，不重新分发受版权保护的论文全文。论文内容和图表版权归原作者及出版方所有。

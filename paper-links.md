@@ -1,6 +1,6 @@
 # 已核验的论文原文与代码链接
 
-核验日期：**2026-10-12**。优先提供正式 proceedings、出版社、PMLR、PubMed、OpenReview 或 arXiv 的论文落地页；落地页通常比直接 PDF 更稳定。GitHub 首页中的论文名称首先链接到本仓库 reading，原文入口集中列在这里。
+核验日期：**2026-10-19**。优先提供正式 proceedings、出版社、PMLR、PubMed、OpenReview 或 arXiv 的论文落地页；落地页通常比直接 PDF 更稳定。GitHub 首页中的论文名称首先链接到本仓库 reading，原文入口集中列在这里。
 
 ## 医学多模态论文
 
@@ -49,6 +49,10 @@
 | 62 | CALM | [MICCAI 2026](https://papers.miccai.org/miccai-2026/0144-Paper2961.html) | DOI/page pending · [Code](https://github.com/jueqiw/CALM) |
 | 63 | Glioma unpaired fusion | [npj Precision Oncology](https://www.nature.com/articles/s41698-026-01366-5) | [DOI](https://doi.org/10.1038/s41698-026-01366-5) · [Code](https://github.com/csaueres/radio-path-glioma-subtyping) |
 | 64 | Angiography-free retina | [npj Digital Medicine](https://www.nature.com/articles/s41746-026-02641-2) | [DOI](https://doi.org/10.1038/s41746-026-02641-2) · [Code](https://github.com/iMED-Lab/IMIG) |
+| 65 | Uni-IMD | [Pattern Recognition](https://www.sciencedirect.com/science/article/pii/S003132032602011X) | [DOI](https://doi.org/10.1016/j.patcog.2026.115047) · Code not verified; online 2026 / volume 2027 |
+| 66 | RAM-Missing | [MICCAI 2026](https://papers.miccai.org/miccai-2026/0854-Paper5091.html) | Chapter DOI pending · [Code](https://github.com/Flliin/RAMMissing) |
+| 67 | PriOrGen | [MICCAI 2026](https://papers.miccai.org/miccai-2026/0809-Paper2990.html) | Chapter DOI pending · [Repository; implementation pending](https://github.com/yangfeng0216/PriOrGen) |
+| 68 | IB-GPID | [ScienceDirect](https://www.sciencedirect.com/science/article/pii/S0169260726003159) | [PubMed](https://pubmed.ncbi.nlm.nih.gov/42546496/) · [DOI](https://doi.org/10.1016/j.cmpb.2026.109566) · [Code](https://github.com/zeruoy/IB-GPID) |
 
 ## 可迁移方法与信息论
 

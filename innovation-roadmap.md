@@ -418,6 +418,30 @@
 
 **可证伪条件。** 若 association 主要随站点/祖源而非锚点增长稳定，或错配患者后联合性能与 biomarker matrix 基本不变，则模型只学到类条件边缘结构；论文必须降级为分布级迁移。只有患者级锚点增长带来可重复的 interaction 增益，并通过外部 paired 队列与负对照，才能声称患者级跨模态生物学。
 
+### Idea 13：PID 决定检索预算，而非给检索结果背书
+
+**组合与科学问题。** 将 IB-GPID 接到路线 A/B 的 RAM-Missing、RMoE 与 EMMS：缺失 CT/组学时，哪些亚组的缺失信息主要是可由现有模态重现的 redundancy，哪些包含不可恢复的 unique/synergy，因而应该获取真实检查或拒绝？新意不在多加一个 PID loss，而在把“可恢复性”作为检索策略可被反证的先验。
+
+**假设与最小模型。** 令观测模态为 $X_o$、候选缺失模态为 $X_m$、任务为 $Y$、缺失掩码/站点为 $R,S$。在训练折内用 paired 子集估计亚组级 Gaussian PID atoms，并只生成三档先验：可检索、需真实获取、信息不足。病例级模型保留 observation-only head、RAM-Missing 式训练折 memory bank、EMMS 式空证据回退和一个经温度缩放的风险 gate；PID 不直接作为病例级解释。
+
+**必要目标与训练/推理。** 主损失为任务损失 $L_y$、完整病例的 proxy consistency、检索相似度监督、gate 的 selective-risk 损失和校准损失；PID 只约束各亚组的平均检索预算。所有特征选择、PID 和 memory bank 均嵌套在训练折，防止 TCGA 重用泄漏。推理时只有“PID 允许且检索后不确定性下降”才使用代理，否则回到 $X_o$ 或建议获取 $X_m$。
+
+**关键对照与消融。** 比较 observation-only、zero fill、RAM-Missing/RMoE、EMMS、随机预算、频率预算与 oracle hide/reveal；消融 PID 定义、Gaussianization、协方差收缩、top-k、entropy、mask 和空证据。报告 AUROC/AUPRC、ECE/Brier、risk–coverage、检查成本，以及 disease × modality-combination × site 的 worst-group risk；检索 entropy 需与 ensemble/重采样不确定性区分。
+
+**外部验证与可证伪条件。** 在第二中心改变扫描协议和检查倾向，分开报告 MCAR、MAR 与 MNAR 敏感性；用 paired 完整病例做真实 hide/reveal。若 PID 排序对估计器选择不稳定，不能预测真实新增模态收益，或检索主要复制同癌种/站点头部邻居，则假设失败；此时保留空证据融合，不能声称“恢复”患者模态。
+
+### Idea 14：把病理报告长尾拆成视觉概念与语言模板两条轴
+
+**组合与科学问题。** 将 PriOrGen 与路线 E 的 RadDiag、EyeCLIP、Neglected Tails 组合：尾部报告性能提升究竟来自更好识别罕见病理概念，还是从 meta-report bank 复述更合适的器官模板？需要同时建模器官/疾病视觉频率、概念—措辞共现和模态可用率，而不是把 11 个癌种的计数当成唯一长尾。
+
+**假设与最小模型。** 构造“视觉概念 × 文本模板 × 中心”三维频率表。冻结 WSI encoder，设置共享视觉概念 head、保留尾部独有证据的 private head、只从训练患者建立的检索式报告先验，以及输出概念—证据对齐和不确定性的解码器。对于无可靠视觉证据的概念，模型允许省略或标记不确定，而不是由语言先验补写。
+
+**必要目标与训练/推理。** 使用报告生成损失、病理概念多标签损失、头尾均衡采样、概念级对比损失、模板交换一致性与证据覆盖损失；prototype bottleneck 只作为压缩正则，不称为正式 IB。训练按患者划分并审计切片/WSI 泄漏；推理同时输出报告、概念证据位置和选择性置信度。
+
+**关键基线与消融。** 比较通用 captioner、PriOrGen、balanced sampler、logit adjustment、EyeCLIP/RadDiag 式知识增强和不使用报告 prior 的视觉模型；消融 prototype、meta-report bank、private branch、均衡采样和 abstention。除 BLEU/METEOR/ROUGE 外，报告罕见概念 macro-F1、事实错误率、器官模板泄漏率、ECE、risk–coverage，并做“同器官换报告模板”“保留报告但遮挡病灶”反事实。
+
+**外部验证与可证伪条件。** 在独立医院/扫描仪和新的报告风格上由病理医师盲评关键诊断、否定词、部位和幻觉；按 head/body/tail 概念与中心交叉报告。若尾部词面指标上升但概念事实性、外部校准或视觉遮挡敏感性不改善，说明方法只学到语言模板，核心视觉长尾主张失败。
+
 ## 五条路线如何取舍
 
 | 路线 | 新颖性潜力 | 数据门槛 | 理论风险 | 临床价值 | 推荐起点 |

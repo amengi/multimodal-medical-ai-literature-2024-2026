@@ -37,6 +37,8 @@
 10. [EMMS](readings/45-emms.md)、[BrainAnytime](readings/46-brainanytime.md) 与 [PS-MIT](readings/51-ps-mit.md)：把空证据、任意模态预训练和条件后验放在同一风险—覆盖坐标系中比较。
 11. [Φ-OMNI](readings/56-phi-omni.md) 与 [SYNPRED](readings/58-synpred.md)：直接比较 PID 启发代理和经验 synergy；再用 [ShapKO](readings/53-shapko.md) 检查任务效用是否与信息量混淆。
 12. [QA-MoE](readings/60-qa-moe.md)、[CALM](readings/62-calm.md) 与 [非配对病理–MRI 融合](readings/63-unpaired-glioma-fusion.md)：区分 evidential quality、类条件分布对齐和患者级互信息；三者都不能直接视为 MI/PID 证据。
+13. [IB-GPID](readings/68-ib-gpid.md)、[RAM-Missing](readings/66-ram-missing.md) 与 [Uni-IMD](readings/65-uni-imd.md)：先用 Gaussian PID 建立群体级可恢复性假设，再用真实 hide/reveal 验证检索收益；Uni-IMD 的 MI 最小化仍需与表示正交和经验解耦区分。
+14. [PriOrGen](readings/67-priorgen.md)：把 prototype bottleneck 当成可检验的压缩假设，不能从模块命名推导出 $I(Z;X)$ 或 $I(Z;Y)$ 的正式界。
 
 ## 可执行的研究假设
 
@@ -88,6 +90,10 @@ ShapKO 的 \(\phi_m\) 是给定模型、验证集和任务指标下，模态 \(m
 ### K. 类条件对齐不能识别患者级联合分布
 
 令影像、组学与标签为 \(X_I,X_G,Y\)，队列来源为 \(S\)。CALM 的 class-conditional MMD 优化的是两队列中 \(p(Z_I\mid Y)\) 与 \(p(Z_G\mid Y)\) 的分布接近；label-pairing 胶质瘤融合则从同类样本构造训练组合。二者都不直接优化或识别患者级 \(p(X_I,X_G\mid Y)\)，更不能由正交投影、对比损失或联合性能提升推出 MI/PID synergy。必须显式控制 \(S\)、年龄/祖源等混杂，加入少量真实配对锚点、锚点洗牌和患者错配负对照；若零锚点下不同初始化得到不等价 association，应将结论限制为分布级关联。
+
+### L. Gaussian PID 必须通过估计器与干预双重稳定性
+
+IB-GPID 令两种组学表示为 \(Z_1,Z_2\)，Gaussianized 生存靶标为 \(T\)，用偏差校正的 Gaussian PID 估计 redundancy、unique 与 synergy；它不是 InfoNCE，也不是无需假设的“真实信息分解”。用于缺失路由前，至少要交叉拟合特征选择，在训练折内估计协方差，并对 PID 定义、靶标变换、收缩协方差、样本量和 bootstrap 重采样做敏感性分析。更关键的是，群体或亚组 atom 的排序必须预测真实 hide/reveal 干预：若高 redundancy 组并不更适合 RAM-Missing 式检索，或高 unique/synergy 组没有更大的真实新增模态收益，则不得用该 PID 结果指导病例级补全或临床获取。
 
 ## 实验注意事项
 
